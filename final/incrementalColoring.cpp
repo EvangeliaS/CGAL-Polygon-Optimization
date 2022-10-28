@@ -30,6 +30,8 @@ void printColoredVertices(std::vector<ColoredVertex> coloredVertices) {
 }
 
 int findVertex(std::vector<ColoredVertex> coloredVertices, Point_2 point);
+void vertexColoring(std::vector<ColoredVertex>& coloredVertices, int color, Point_2 point);
+
 
 class ColoredEdge  {
 public:
@@ -41,7 +43,6 @@ public:
     {}
 };
 
-int vertexColoring(ColoredEdge edge1, ColoredEdge edge2);
 void printPolygon(Polygon_2 points);
 
 
@@ -117,31 +118,8 @@ int main()
                 // Print that it's a blue edge
                 std::cout << "Blue Edge" << std::endl;
                 coloredEdges.push_back(ColoredEdge(edge, BLUE));
-                index = findVertex(coloredVertices, source);
-                if (index == -1)
-                {
-                    // If not found, add it
-                    coloredVertices.push_back(ColoredVertex(source, BLUE));
-                }
-                else
-                {
-                    // If it's not blue, make it burgundy
-                    if( coloredVertices[index].color != BLUE)
-                        coloredVertices[index].color = BURGUNDY;
-                }
-
-                index = findVertex(coloredVertices, target);
-                if (index == -1)
-                {
-                    // If not found, add it
-                    coloredVertices.push_back(ColoredVertex(target, BLUE));
-                }
-                else
-                {
-                    // If it's not blue, make it burgundy
-                    if( coloredVertices[index].color != BLUE)
-                        coloredVertices[index].color = BURGUNDY;
-                }
+                vertexColoring(coloredVertices, BLUE, source);
+                vertexColoring(coloredVertices, BLUE, target);
             }
             // Red Edge - different sign
             else if (testOrientation != convHullOrientation && testOrientation != CGAL::COLLINEAR)
@@ -149,31 +127,8 @@ int main()
                 // Print that it's a red edge
                 std::cout << "Red Edge" << std::endl;
                 coloredEdges.push_back(ColoredEdge(edge, RED));
-                index = findVertex(coloredVertices, source);
-                if (index == -1)
-                {
-                    // If not found, add it
-                    coloredVertices.push_back(ColoredVertex(source, RED));
-                }
-                else
-                {
-                    // If it's not red, make it burgundy
-                    if( coloredVertices[index].color != RED)
-                        coloredVertices[index].color = BURGUNDY;
-                }
-
-                index = findVertex(coloredVertices, target);
-                if (index == -1)
-                {
-                    // If not found, add it
-                    coloredVertices.push_back(ColoredVertex(target, RED));
-                }
-                else
-                {
-                    // If it's not red, make it burgundy
-                    if( coloredVertices[index].color != RED)
-                        coloredVertices[index].color = BURGUNDY;
-                }
+                vertexColoring(coloredVertices, RED, source);
+                vertexColoring(coloredVertices, RED, target);
             }
             else
             {
@@ -193,24 +148,17 @@ int main()
     return 0;
 }
 
+
+
+
+
+
+
+
 void printPolygon(Polygon_2 points)
 {
     for (Point_2 p : points)
         std::cout << p << std::endl;
-}
-
-int vertexColoring(ColoredEdge edge1, ColoredEdge edge2)
-{
-    if (edge1.color == RED && edge2.color == RED)
-        return RED;
-    else if (edge1.color == BLUE && edge2.color == BLUE)
-        return BLUE;
-    else if (edge1.color == RED && edge2.color == BLUE)
-        return BURGUNDY;
-    else if (edge1.color == BLUE && edge2.color == RED)
-        return BURGUNDY;
-    else
-        return ERROR;
 }
 
 int findVertex(std::vector<ColoredVertex> coloredVertices, Point_2 point)
@@ -225,4 +173,20 @@ int findVertex(std::vector<ColoredVertex> coloredVertices, Point_2 point)
         }
     }
     return index;
+}
+
+void vertexColoring(std::vector<ColoredVertex>& coloredVertices, int color, Point_2 point)
+{
+    int index = findVertex(coloredVertices, point);
+    if (index == -1)
+    {
+        // If not found, add it
+        coloredVertices.push_back(ColoredVertex(point, color));
+    }
+    else
+    {
+        // If it's not the same color, make it burgundy
+        if (coloredVertices[index].color != color)
+            coloredVertices[index].color = BURGUNDY;
+    }
 }

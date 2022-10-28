@@ -1,34 +1,19 @@
-#include <CGAL/Simple_cartesian.h>
-
-typedef CGAL::Simple_cartesian<double> Kernel;
-typedef Kernel::Point_2 Point_2;
-typedef Kernel::Segment_2 Segment_2;
-
-
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Polygon_2.h>
+#include <iostream>
+typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
+typedef K::Point_2 Point;
+typedef CGAL::Polygon_2<K> Polygon_2;
+using std::cout; using std::endl;
 int main()
 {
-  Point_2 p(1,1), q(10,10);
-  std::cout << "p = " << p << std::endl;
-  std::cout << "q = " << q.x() << " " << q.y() << std::endl;
-  std::cout << "sqdist(p,q) = "
-            << CGAL::squared_distance(p,q) << std::endl;
-  Segment_2 s(p,q);
-  Point_2 m(5, 9);
-  std::cout << "m = " << m << std::endl;
-  std::cout << "sqdist(Segment_2(p,q), m) = "
-            << CGAL::squared_distance(s,m) << std::endl;
-  std::cout << "p, q, and m ";
-  switch (CGAL::orientation(p,q,m)){
-  case CGAL::COLLINEAR:
-    std::cout << "are collinear\n";
-    break;
-  case CGAL::LEFT_TURN:
-    std::cout << "make a left turn\n";
-    break;
-  case CGAL::RIGHT_TURN:
-    std::cout << "make a right turn\n";
-    break;
-  }
-  std::cout << " midpoint(p,q) = " << CGAL::midpoint(p,q) << std::endl;
+  Point points[] = { Point(0,0), Point(5.1,0), Point(1,1), Point(0.5,6)};
+  Polygon_2 pgn(points, points+4);
+  // check if the polygon is simple.
+  cout << "The polygon is " <<
+    (pgn.is_simple() ? "" : "not ") << "simple." << endl;
+  // check if the polygon is convex
+  cout << "The polygon is " <<
+    (pgn.is_convex() ? "" : "not ") << "convex." << endl;
   return 0;
 }

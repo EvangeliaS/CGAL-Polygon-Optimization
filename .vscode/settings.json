@@ -56,5 +56,6 @@
         "variant": "cpp"
     },
     "python.analysis.typeCheckingMode": "off",
-    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+    "cmake.sourceDirectory": "${workspaceFolder}/final"
 }
