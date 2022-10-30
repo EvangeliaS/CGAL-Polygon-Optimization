@@ -1,6 +1,9 @@
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 #include <iostream>
+#include <fstream>
+#include <string>
+
 
 #define ERROR -1
 #define RED 1
@@ -45,26 +48,53 @@ public:
 
 void printPolygon(Polygon_2 points);
 
-
-int main()
+std::vector<std::string> split(const std::string& s, char delimiter)
 {
-    Point_2 p1(1, 1), p2(10, 10), p3(5, 9), p4(2, 7), p5(3, 6), p6(3.5, 4.5), p7(5, 4), p8(6, 3), p9(9, 2);
-    typedef CGAL::Polygon_2<Kernel> Polygon_2;
+   std::vector<std::string> tokens;
+   std::string token;
+   std::istringstream tokenStream(s);
+   while (std::getline(tokenStream, token, delimiter))
+   {
+      tokens.push_back(token);
+   }
+   return tokens;
+}
+
+
+int main(int argc, char** argv)
+{
+    if(argc < 3) {
+        std::cout << "Usage: " << argv[0] << " -i <point set input file>" << std::endl;
+        return ERROR;
+    }
+    std::string inputFile = argv[2];
+    // inputFile ="../instances/data/images/euro-night-0000010.instance";
+
+    std::ifstream input(inputFile);
+    if (!input) {
+        std::cout << "Could not open file " << inputFile << std::endl;
+        return ERROR;
+    }
+
+    //Ignore first two lines
+    std::string line;
+    std::getline(input, line);
+    std::getline(input, line);
+
 
     Polygon_2 polygon;
-    polygon.push_back(p1);
-    polygon.push_back(p2);
-    polygon.push_back(p3);
-    polygon.push_back(p4);
-    polygon.push_back(p5);
-    polygon.push_back(p6);
-    polygon.push_back(p7);
-    polygon.push_back(p8);
-    polygon.push_back(p9);
 
-    // //Sort points by x-coordinate largest to smallest
-    // std::sort(points.begin(), points.end(), [](Point_2 p1, Point_2 p2) { return p1.x() > p2.x(); });
-    // printPointVector(points);
+    //Loop to read inputFile line by line
+    while(std::getline(input, line))
+    {
+        std::vector<std::string> tokens = split(line, '\t');
+        polygon.push_back(Point_2(std::stod(tokens[1]), std::stod(tokens[2])));
+    }
+    std::cout << "----------------------------" << std::endl;
+    printPolygon(polygon);
+    std::cout << "----------------------------" << std::endl;
+
+
 
     // Sort points by x-coordinate smallest to largest
     std::sort(polygon.begin(), polygon.end(), [](Point_2 p1, Point_2 p2)
@@ -137,17 +167,45 @@ int main()
             }
         }
 
-        printColoredVertices(coloredVertices);
+        // printColoredVertices(coloredVertices);
+        // Remove all red vertices from the convexHull
+        for (int j = 0; j < coloredVertices.size(); j++)
+        {
+            if (coloredVertices[j].color == RED)
+            {
+                convexHull.erase(std::find(convexHull.begin(), convexHull.end(), coloredVertices[j].point));
+            }
+        } 
+        // Push back the new point to the convexHull
+        convexHull.push_back(polygon[i]);
 
+
+        const bool simpl = convexHull.is_simple();
+        if (simpl)
+            std::cout << "Simple polygon" << std::endl;
+        else
+        {
+            std::cout << "Not simple" << std::endl;
+            //Swap last and second to last points
+            std::swap(convexHull[convexHull.size() - 1], convexHull[convexHull.size() - 2]);
+            const bool simpl = convexHull.is_simple();
+            if (simpl)
+                std::cout << "Made it a Simple polygon" << std::endl;
+            else
+                std::cout << "Still not simple" << std::endl;
+        }
+
+
+        printPolygon(convexHull);
         std::cout << std::endl;
         // break;
     }
 
     // convexHull.push_back(p1);
+    //print convexHull
 
     return 0;
 }
-
 
 
 
