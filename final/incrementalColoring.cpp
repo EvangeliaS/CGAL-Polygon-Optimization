@@ -1,4 +1,5 @@
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/convex_hull_2.h>
 #include <CGAL/Polygon_2.h>
 #include <iostream>
 #include <fstream>
@@ -63,12 +64,12 @@ std::vector<std::string> split(const std::string& s, char delimiter)
 
 int main(int argc, char** argv)
 {
-    if(argc < 3) {
-        std::cout << "Usage: " << argv[0] << " -i <point set input file>" << std::endl;
-        return ERROR;
-    }
+    // if(argc < 3) {
+    //     std::cout << "Usage: " << argv[0] << " -i <point set input file>" << std::endl;
+    //     return ERROR;
+    // }
     std::string inputFile = argv[2];
-    // inputFile ="../instances/data/images/euro-night-0000010.instance";
+    inputFile ="../instances/data/images/euro-night-0000010.instance";
 
     std::ifstream input(inputFile);
     if (!input) {
@@ -82,7 +83,7 @@ int main(int argc, char** argv)
     std::getline(input, line);
 
 
-    Polygon_2 polygon;
+    Polygon_2 polygon, A;
 
     //Loop to read inputFile line by line
     while(std::getline(input, line))
@@ -104,22 +105,26 @@ int main(int argc, char** argv)
     // Convex Hull empty set
     Polygon_2 convexHull;
 
-    // Insert first three points
-    convexHull.push_back(polygon[0]);
-    convexHull.push_back(polygon[1]);
-    convexHull.push_back(polygon[2]);
+    // // Insert first three points
+    // convexHull.push_back(polygon[0]);
+    // convexHull.push_back(polygon[1]);
+    // convexHull.push_back(polygon[2]);
 
     for (int i = 3; i < polygon.size(); i++)
     {
         std::vector<ColoredEdge> coloredEdges;
         std::vector<ColoredVertex> coloredVertices;
+
+        // Calculate convex hull of polygon up to the i-th point
+        CGAL::convex_hull_2(polygon.begin(), polygon.begin() + i, std::back_inserter(convexHull));       
+
+
         //for all the edges of the convex hull
         for (int j = 0; j < convexHull.size(); j++)
         {
             Polygon_2::Segment_2 edge = convexHull.edge(j);
             Point_2 source = edge.source();
             Point_2 target = edge.target();
-
 
 
             std::cout << "Point: " << polygon[i] << " -- Edge: " << source << " -- " << target << std::endl;
@@ -166,6 +171,37 @@ int main(int argc, char** argv)
                 std::cout << "Collinear Edge" << std::endl;
             }
         }
+        // Print Colored Edges
+        std::cout << "Colored Edges:" << std::endl;
+        for (int j = 0; j < coloredEdges.size(); j++)
+        {
+            std::cout << coloredEdges[j].edge << ", color: " << coloredEdges[j].color << std::endl;
+        }
+
+        // For every red edge
+        for (int j = 0; j < coloredEdges.size(); j++)
+        {
+            if(coloredEdges[j].color == RED)
+            {
+                // If convexHull is the same as polygon A
+                    // Insert the new point to A inbetween edge.source() and edge.target()
+                // else
+
+                // Find visible edges
+                // If there are visible edges of polygon A from the new point
+                    // Choose the edge randomly or depending on the area of the triangles created
+                    // Insert the new point to A inbetween the chosen edges' source and target
+                // else
+                    // If this edge is on the convexHull and not in polygon A
+                        // continue
+                    // else
+                        // Insert the new point to A inbetween edge.source() and edge.target()
+            }
+        }
+
+
+
+
 
         // printColoredVertices(coloredVertices);
         // Remove all red vertices from the convexHull
