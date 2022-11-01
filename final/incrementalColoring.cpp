@@ -1,5 +1,6 @@
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/convex_hull_2.h>
+#include <CGAL/intersections.h>
 #include <CGAL/Polygon_2.h>
 #include <iostream>
 #include <fstream>
@@ -15,6 +16,7 @@
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef Kernel::Point_2 Point_2;
+typedef Kernel::Triangle_2 Triangle_2;
 typedef CGAL::Polygon_2<Kernel> Polygon_2;
 
 class ColoredVertex {
@@ -32,10 +34,6 @@ void printColoredVertices(std::vector<ColoredVertex> coloredVertices) {
         std::cout << coloredVertices[i].point << ", color: " << coloredVertices[i].color << std::endl;
     }
 }
-
-int findVertex(std::vector<ColoredVertex> coloredVertices, Point_2 point);
-void vertexColoring(std::vector<ColoredVertex>& coloredVertices, int color, Point_2 point);
-
 
 class ColoredEdge  {
 public:
@@ -60,6 +58,14 @@ std::vector<std::string> split(const std::string& s, char delimiter)
    }
    return tokens;
 }
+
+
+int findVertex(std::vector<ColoredVertex> coloredVertices, Point_2 point);
+int findPolygonPoint(Polygon_2 polygon, Point_2 point);
+void vertexColoring(std::vector<ColoredVertex>& coloredVertices, int color, Point_2 point);
+void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std::vector<Polygon_2::Segment_2>& visibleEdges);
+
+
 
 
 int main(int argc, char** argv)
@@ -102,21 +108,27 @@ int main(int argc, char** argv)
               { return p1.x() < p2.x(); });
     printPolygon(polygon);
 
-    // Convex Hull empty set
-    Polygon_2 convexHull;
 
     // // Insert first three points
     // convexHull.push_back(polygon[0]);
     // convexHull.push_back(polygon[1]);
     // convexHull.push_back(polygon[2]);
 
+    // Insert the first three points to polygon A
+    A.push_back(polygon[0]);
+    A.push_back(polygon[1]);
+    A.push_back(polygon[2]);
+
     for (int i = 3; i < polygon.size(); i++)
     {
+        // Convex Hull empty set
+        Polygon_2 convexHull;
+
         std::vector<ColoredEdge> coloredEdges;
         std::vector<ColoredVertex> coloredVertices;
 
-        // Calculate convex hull of polygon up to the i-th point
-        CGAL::convex_hull_2(polygon.begin(), polygon.begin() + i, std::back_inserter(convexHull));       
+        // Calculate convex hull of polygon A up to the i-th point
+        CGAL::convex_hull_2(A.begin(), A.end(), std::back_inserter(convexHull));       
 
 
         //for all the edges of the convex hull
@@ -127,7 +139,7 @@ int main(int argc, char** argv)
             Point_2 target = edge.target();
 
 
-            std::cout << "Point: " << polygon[i] << " -- Edge: " << source << " -- " << target << std::endl;
+            // std::cout << "Point: " << polygon[i] << " -- Edge: " << source << " -- " << target << std::endl;
             // Balta sto .h
             // ---------------------------------------------------------------1----------------2------
             CGAL::Orientation testOrientation = CGAL::orientation(source, target, polygon[i]);
@@ -151,7 +163,7 @@ int main(int argc, char** argv)
             if (testOrientation == convHullOrientation && testOrientation != CGAL::COLLINEAR)
             {
                 // Print that it's a blue edge
-                std::cout << "Blue Edge" << std::endl;
+                // std::cout << "Blue Edge" << std::endl;
                 coloredEdges.push_back(ColoredEdge(edge, BLUE));
                 vertexColoring(coloredVertices, BLUE, source);
                 vertexColoring(coloredVertices, BLUE, target);
@@ -160,7 +172,7 @@ int main(int argc, char** argv)
             else if (testOrientation != convHullOrientation && testOrientation != CGAL::COLLINEAR)
             {
                 // Print that it's a red edge
-                std::cout << "Red Edge" << std::endl;
+                // std::cout << "Red Edge" << std::endl;
                 coloredEdges.push_back(ColoredEdge(edge, RED));
                 vertexColoring(coloredVertices, RED, source);
                 vertexColoring(coloredVertices, RED, target);
@@ -172,32 +184,78 @@ int main(int argc, char** argv)
             }
         }
         // Print Colored Edges
-        std::cout << "Colored Edges:" << std::endl;
+        std::cout << "Colored Edges:" << "Point: " << polygon[i] << std::endl;
         for (int j = 0; j < coloredEdges.size(); j++)
         {
             std::cout << coloredEdges[j].edge << ", color: " << coloredEdges[j].color << std::endl;
         }
+
+        std::vector<Polygon_2::Segment_2> visibleEdges;
 
         // For every red edge
         for (int j = 0; j < coloredEdges.size(); j++)
         {
             if(coloredEdges[j].color == RED)
             {
-                // If convexHull is the same as polygon A
-                    // Insert the new point to A inbetween edge.source() and edge.target()
-                // else
+                // // If convexHull is the same as polygon A
+                // if (convexHull == A)
+                // {
+                //     // Insert the new point to A inbetween edge.source() and edge.target()
+
+                //     // Find the position of target in polygon A
+                //     int index = findPolygonPoint(A, coloredEdges[j].edge.target());
+                //     // Insert it before target
+                //     A.insert(A.begin() + index, polygon[i]);
+                //     break;
+                //     printPolygon(A);
+                // }
 
                 // Find visible edges
-                // If there are visible edges of polygon A from the new point
-                    // Choose the edge randomly or depending on the area of the triangles created
-                    // Insert the new point to A inbetween the chosen edges' source and target
-                // else
-                    // If this edge is on the convexHull and not in polygon A
-                        // continue
+                findVisibleEdges(A, polygon[i], coloredEdges[j], visibleEdges);
+                // print visible edges
+
+
+                // Choose the edge randomly or depending on the area of the triangles created
+                // Polygon_2::Segment_2 edge = visibleEdges[0];
+                // // Insert the new point to A inbetween the chosen edges' source and target
+                // int index = findPolygonPoint(A, edge.target()); 
+                // A.insert(A.begin() + index, polygon[i]);
+                // std::cout << "------------ A ------------" << std::endl;
+                // printPolygon(A);
+                // std::cout << "---------------------------" << std::endl;
+                // break;
+
                     // else
-                        // Insert the new point to A inbetween edge.source() and edge.target()
+                    // {
+                    //     // If this edge is on the convexHull and not in polygon A
+                    //         // Find index of coloredEdges[j].edge.source() in polygon A  
+                    //         int indexSource = findPolygonPoint(A, coloredEdges[j].edge.source());
+                    //         int indexTarget = findPolygonPoint(A, coloredEdges[j].edge.target());
+                    //         if(!(indexSource == indexTarget -1 || (indexSource == polygon.size() - 1 && indexTarget == 0)))
+                    //             continue;
+                    //         else
+                    //         {
+                    //             // Insert the new point to A inbetween edge.source() and edge.target()
+                    //             A.insert(A.begin() + indexTarget, polygon[i]);
+                    //             break;
+                    //         }
+                    // }
             }
+
         }
+        std::cout << "Visible Edges:" << std::endl;
+        for (int k = 0; k < visibleEdges.size(); k++)
+        {
+            std::cout << visibleEdges[k] << std::endl;
+        }
+        Polygon_2::Segment_2 edge = visibleEdges[0];
+        // Insert the new point to A inbetween the chosen edges' source and target
+        int index = findPolygonPoint(A, edge.target()); 
+        A.insert(A.begin() + index, polygon[i]);
+        std::cout << "------------ A ------------" << std::endl;
+        printPolygon(A);
+        std::cout << "---------------------------" << std::endl;
+        continue;
 
 
 
@@ -269,6 +327,20 @@ int findVertex(std::vector<ColoredVertex> coloredVertices, Point_2 point)
     return index;
 }
 
+int findPolygonPoint(Polygon_2 polygon, Point_2 point)
+{
+    int index = -1;
+    for (int i = 0; i < polygon.size(); i++)
+    {
+        if (polygon[i] == point)
+        {
+            index = i;
+            return index;
+        }
+    }
+    return index;   
+}
+
 void vertexColoring(std::vector<ColoredVertex>& coloredVertices, int color, Point_2 point)
 {
     int index = findVertex(coloredVertices, point);
@@ -282,5 +354,54 @@ void vertexColoring(std::vector<ColoredVertex>& coloredVertices, int color, Poin
         // If it's not the same color, make it burgundy
         if (coloredVertices[index].color != color)
             coloredVertices[index].color = BURGUNDY;
+    }
+}
+
+void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std::vector<Polygon_2::Segment_2>& visibleEdges)
+{
+    // Find index of redEdge.source() in polygon  
+    int indexSource = findPolygonPoint(polygon, redEdge.edge.source());
+    int indexTarget = findPolygonPoint(polygon, redEdge.edge.target());
+    // If edge is on polygon
+    if(indexSource == indexTarget -1 || (indexSource == polygon.size() - 1 && indexTarget == 0))
+    {
+        // The edge is visible
+        visibleEdges.push_back(redEdge.edge);
+
+    }
+    else
+    {
+        // Traverse the polygon from redEdge.source() to redEdge.target()
+        for(int i = indexSource; i != indexTarget; i = (i + 1) % polygon.size())
+        {
+            Triangle_2 triangle(polygon[i], polygon[(i + 1) % polygon.size()], point);
+
+            // Get the firdt edge of the triangle
+            Polygon_2::Segment_2 edge = polygon.edge(i);
+
+
+            const auto mutual = CGAL::intersection(triangle, edge);
+            if (mutual)
+            {
+                // If the intersection is a Segment
+                if (const Polygon_2::Segment_2* mutualSegment = boost::get<Polygon_2::Segment_2>(&*mutual))
+                {
+                    std::cout << *mutualSegment << std::endl;
+                    // Check if the mutualSegment is the same as the edge and add it to the visible edges
+                    if (mutualSegment->source() == edge.source() && mutualSegment->target() == edge.target())
+                    {
+                        // The edge is visible
+                        visibleEdges.push_back(edge);
+                    }
+                }
+                else
+                // If the intersection is a point then it's not visible 
+                {
+                    const Point_2* mutualPoint = boost::get<Point_2 >(&*mutual);
+                    std::cout << *mutualPoint << std::endl;
+                }
+            }
+        }
+
     }
 }
