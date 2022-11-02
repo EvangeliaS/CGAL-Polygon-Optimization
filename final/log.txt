@@ -1,0 +1,1 @@
+Usage: ./program -i <point set input file>
