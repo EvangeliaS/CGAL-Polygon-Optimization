@@ -123,6 +123,33 @@ program/fast:
 	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/build
 .PHONY : program/fast
 
+coloring.o: coloring.cpp.o
+
+.PHONY : coloring.o
+
+# target to build an object file
+coloring.cpp.o:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/coloring.cpp.o
+.PHONY : coloring.cpp.o
+
+coloring.i: coloring.cpp.i
+
+.PHONY : coloring.i
+
+# target to preprocess a source file
+coloring.cpp.i:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/coloring.cpp.i
+.PHONY : coloring.cpp.i
+
+coloring.s: coloring.cpp.s
+
+.PHONY : coloring.s
+
+# target to generate assembly for a file
+coloring.cpp.s:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/coloring.cpp.s
+.PHONY : coloring.cpp.s
+
 incrementalColoring.o: incrementalColoring.cpp.o
 
 .PHONY : incrementalColoring.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... program"
+	@echo "... coloring.o"
+	@echo "... coloring.i"
+	@echo "... coloring.s"
 	@echo "... incrementalColoring.o"
 	@echo "... incrementalColoring.i"
 	@echo "... incrementalColoring.s"

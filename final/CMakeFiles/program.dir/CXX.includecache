@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/home/stathis/git/project_dit_emiris/final/coloring.h
+CGAL/Exact_predicates_inexact_constructions_kernel.h
+-
+CGAL/convex_hull_2.h
+-
+CGAL/intersections.h
+-
+CGAL/Polygon_2.h
+-
+
 /home/stathis/git/project_dit_emiris/final/incrementalColoring.cpp
 CGAL/Exact_predicates_inexact_constructions_kernel.h
 -
@@ -23,4 +33,6 @@ string
 -
 time.h
 -
+coloring.h
+/home/stathis/git/project_dit_emiris/final/coloring.h
 

@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/program.dir/coloring.cpp.o"
   "CMakeFiles/program.dir/incrementalColoring.cpp.o"
   "program"
   "program.pdb"

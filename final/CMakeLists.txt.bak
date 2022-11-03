@@ -36,7 +36,7 @@ endif()
 # Creating entries for target: program
 # ############################
 
-add_executable( program  incrementalColoring.cpp )
+add_executable( program  coloring.cpp incrementalColoring.cpp )
 
 add_to_cached_list( CGAL_EXECUTABLE_TARGETS program )
 
