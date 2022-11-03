@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/stathis/git/project_dit_emiris/final/coloring.cpp
+coloring.h
+/home/stathis/git/project_dit_emiris/final/coloring.h
+
 /home/stathis/git/project_dit_emiris/final/coloring.h
 CGAL/Exact_predicates_inexact_constructions_kernel.h
 -
@@ -32,6 +36,12 @@ fstream
 string
 -
 time.h
+-
+float.h
+-
+algorithm
+-
+random
 -
 coloring.h
 /home/stathis/git/project_dit_emiris/final/coloring.h

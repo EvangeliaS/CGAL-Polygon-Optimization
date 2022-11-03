@@ -282,14 +282,16 @@ void incrementalAlgorithm(Polygon_2 polygon,int edgeSelection)
             std::cout << visibleEdges[k].edge << "  -- Area: " << visibleEdges[k].area << " -- Invert: " << visibleEdges[k].invert << std::endl;
         }
 
-        // Chose the visible edge
+        // Choose the visible edge
         int index = -1;
 
-        // Chose index randomly
+        // Choose edge randomly
         if (edgeSelection == 1)
             index = rand() % visibleEdges.size();
+        // Add edge so that min area is added to A
         else if (edgeSelection == 2)
             index = findMinAreaEdge(visibleEdges);
+        // Add edge so that max area is added to A
         else if (edgeSelection == 3)
             index = findMaxAreaEdge(visibleEdges);
 
