@@ -9,6 +9,7 @@
 #define GREY 4
 
 
+// Stores an edge and it's color
 class ColoredEdge
 {
 public:
@@ -21,6 +22,7 @@ public:
     }
 };
 
+// Stores an edge and the area of the triangle formed by the edge and a point
 class EdgeArea
 {
 public:
@@ -34,9 +36,13 @@ public:
     }
 };
 
+// Finds the visible edges from a point to the polygon and stores them in visibleEdges
 void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std::vector<EdgeArea> &visibleEdges);
+// Returns the index of the edge that forms the smallest triangle by area
 int findMinAreaEdge(std::vector<EdgeArea> visibleEdges);
+// Returns the index of the edge that forms the largest triangle by area
 int findMaxAreaEdge(std::vector<EdgeArea> visibleEdges);
+// Returns the polygon formed by following the incremental algorithm of the assignment. constructionTime gets updated.
 Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constructionTime);
 
 #endif // __INCREMENTAL_ALGORITHM_H__

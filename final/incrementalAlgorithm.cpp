@@ -6,19 +6,21 @@
 
 void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std::vector<EdgeArea> &visibleEdges)
 {
-    // Find index of redEdge.source() in polygon
+    // Find indexes of redEdge.source() and redEdge.target() in polygon
     int indexSource = findPolygonPoint(polygon, redEdge.edge.source());
     int indexTarget = findPolygonPoint(polygon, redEdge.edge.target());
-    // If edge is on polygon
+
+    // If the edge of the CH is on the polygon -- Consecutive edges of the polygon
     if (indexSource == indexTarget - 1 || (indexSource == polygon.size() - 1 && indexTarget == 0))
     {
         // The edge is visible
         Triangle_2 triangle(polygon[indexSource], polygon[indexTarget], point);
         visibleEdges.push_back(EdgeArea(redEdge.edge, std::abs(triangle.area()), false));
     }
+    // The consecutive edges of the polygon, but in reverse order
     else if (indexTarget == indexSource - 1 || (indexTarget == polygon.size() - 1 && indexSource == 0))
     {
-        // The edge is visible, must be flipped
+        // The edge is visible but must be flipped
         Triangle_2 triangle(polygon[indexSource], polygon[indexTarget], point);
         visibleEdges.push_back(EdgeArea(redEdge.edge, std::abs(triangle.area()), true));
     }
@@ -29,11 +31,13 @@ void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std
         {
             Triangle_2 triangle(polygon[i], polygon[(i + 1) % polygon.size()], point);
 
+            // Candidate edge to get added to visibleEdges
             Polygon_2::Segment_2 candidateEdge(polygon[i], polygon[(i + 1) % polygon.size()]);
 
-            // CHECK IF THE POLYGON INTERSECTS THE TRIANGLE
+            // Check if the polygon intersects the triangle
             bool isIntersecting = false;
 
+            // Check every edge of the polygon
             for (int j = 0; j < polygon.size(); j++)
             {
                 Polygon_2::Segment_2 edge = polygon.edge(j);
@@ -72,9 +76,10 @@ void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std
 
             Polygon_2::Segment_2 candidateEdge(polygon[i], polygon[(i + 1) % polygon.size()]);
 
-            // CHECK IF THE POLYGON INTERSECTS THE TRIANGLE
+            // Check if the polygon intersects the triangle
             bool isIntersecting = false;
 
+            // Check every edge of the polygon
             for (int j = 0; j < polygon.size(); j++)
             {
                 Polygon_2::Segment_2 edge = polygon.edge(j);
@@ -92,7 +97,6 @@ void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std
                         {
                             // Found an intersection Segment, therefore the edge in question,
                             // polygon[i] to polygon[(i + 1) % polygon.size()],  is not visible
-                            // std::cout << "Intersecting Segment" << std::endl;
                             isIntersecting = true;
                             break;
                         }
@@ -100,10 +104,7 @@ void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std
                     else
                     // If the intersection is a point then the polygon and the triangle
                     // share a vertex, therefore the edge in question can still be visible
-                    {
                         const Point_2 *mutualPoint = boost::get<Point_2>(&*mutual);
-                        // std::cout << "Intersecting Point" << std::endl;
-                    }
                 }
             }
             if (!isIntersecting)
@@ -177,10 +178,13 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
             CGAL::Orientation testOrientation = CGAL::orientation(source, target, polygon[i]);
             CGAL::Orientation convHullOrientation = CGAL::orientation(source, target, convexHull[0]);
 
+            // If a point is chosen twice for the orientation calculations, choose the next point
             if (edge.has_on(convexHull[0]))
             {
                 for (auto point : convexHull)
                 {
+                    // If the point is not on the edge, calculate the orientation
+                    // of the internal point in the convex hull
                     if (!edge.has_on(point))
                     {
                         convHullOrientation = CGAL::orientation(source, target, point);
@@ -192,36 +196,19 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
             int index = -1;
             // Blue Edge - same sign
             if (testOrientation == convHullOrientation && testOrientation != CGAL::COLLINEAR)
-            {
-                // Print that it's a blue edge
-                // std::cout << "Blue Edge" << std::endl;
                 coloredEdges.push_back(ColoredEdge(edge, BLUE));
-            }
             // Red Edge - different sign
             else if (testOrientation != convHullOrientation && testOrientation != CGAL::COLLINEAR)
-            {
-                // Print that it's a red edge
-                // std::cout << "Red Edge" << std::endl;
                 coloredEdges.push_back(ColoredEdge(edge, RED));
-            }
+            // Grey Edge - collinear
             else
-            {
-                // Print that it's a collinear edge
-                std::cout << "Collinear Edge -- " << edge << std::endl;
                 coloredEdges.push_back(ColoredEdge(edge, GREY));
-            }
-        }
-        // Print Colored Edges
-        std::cout << "Colored Edges:"
-                  << "Point: " << polygon[i] << std::endl;
-        for (int j = 0; j < coloredEdges.size(); j++)
-        {
-            std::cout << coloredEdges[j].edge << ", color: " << coloredEdges[j].color << std::endl;
         }
 
+        // Vector of visible edges
         std::vector<EdgeArea> visibleEdges;
 
-        // For every red edge
+        // For every Red edge of the CH find the visible edges of the polygon
         for (int j = 0; j < coloredEdges.size(); j++)
         {
             if (coloredEdges[j].color == RED)
@@ -229,9 +216,9 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
                 findVisibleEdges(A, polygon[i], coloredEdges[j], visibleEdges);
             }
         }
+        // If there are no visible edges, check the Grey edges
         if (visibleEdges.empty())
         {
-            std::cout << "CHECKING GREY EDGES" << std::endl;
             // For every grey edge
             for (int j = 0; j < coloredEdges.size(); j++)
             {
@@ -241,51 +228,43 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
                 }
             }
         }
-        std::cout << "Visible Edges:" << std::endl;
-        for (int k = 0; k < visibleEdges.size(); k++)
-        {
-            std::cout << visibleEdges[k].edge << "  -- Area: " << visibleEdges[k].area << " -- Invert: " << visibleEdges[k].invert << std::endl;
-        }
+        // std::cout << "Visible Edges:" << std::endl;
+        // for (int k = 0; k < visibleEdges.size(); k++)
+        // {
+        //     std::cout << visibleEdges[k].edge << "  -- Area: " << visibleEdges[k].area << " -- Invert: " << visibleEdges[k].invert << std::endl;
+        // }
 
-        // Choose the visible edge
+
         int index = -1;
 
-        // Choose edge randomly
+        // Choose a visible edge randomly
         if (edgeSelection == 1)
             index = rand() % visibleEdges.size();
-        // Add edge so that min area is added to A
+        // Add a visible edge so that min area is added to A
         else if (edgeSelection == 2)
             index = findMinAreaEdge(visibleEdges);
-        // Add edge so that max area is added to A
+        // Add a visible edge so that max area is added to A
         else if (edgeSelection == 3)
             index = findMaxAreaEdge(visibleEdges);
 
         Polygon_2::Segment_2 edge = visibleEdges[index].edge;
-        std::cout << "Chosen Edge: " << edge << std::endl;
+
+        // std::cout << "Chosen Edge: " << edge << std::endl;
+
 
         // Insert the new point to A inbetween the chosen edges' source and target
-
         if (!visibleEdges[index].invert)
             index = findPolygonPoint(A, edge.target());
+        // If the edge is inverted, insert the point before the source
         else
             index = findPolygonPoint(A, edge.source());
+        
         A.insert(A.begin() + index, polygon[i]);
-        std::cout << "------------ A ------------" << std::endl;
-        printPolygon(A);
-        const bool simpl = A.is_simple();
-        if (simpl)
-            std::cout << "Simple polygon" << std::endl;
-        else
-        {
-            std::cout << "Not simple" << std::endl;
-        }
-        std::cout << "---------------------------" << std::endl;
     }
 
     // Construction time of incremental algorithm in milliseconds
     end = clock();
     constructionTime = (end - start) / (double)(CLOCKS_PER_SEC / 1000);
-    std::cout << "Construction Time: " << constructionTime << std::endl;
 
     return A;
 }

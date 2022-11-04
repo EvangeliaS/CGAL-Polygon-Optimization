@@ -14,10 +14,13 @@ typedef Kernel::Point_2 Point_2;
 typedef Kernel::Triangle_2 Triangle_2;
 typedef CGAL::Polygon_2<Kernel> Polygon_2;
 
-
+// Prints the Polygon_2
 void printPolygon(Polygon_2 points);
+// Returns the index of a point in the polygon. If the point is not in the polygon, returns -1.
 int findPolygonPoint(Polygon_2 polygon, Point_2 point);
+// Splits a string into a vector of strings, using the delimiter.
 std::vector<std::string> split(const std::string &s, char delimiter);
+// Writes the output to the output file.
 void writeToOutput(Polygon_2 A, double area, double ratio, int constructionTime, std::string outputFile, std::string algorithm, int edgeSelection, std::string initialization);
 
 
