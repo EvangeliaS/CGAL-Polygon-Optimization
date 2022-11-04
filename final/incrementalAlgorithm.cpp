@@ -1,40 +1,8 @@
-#ifndef __COLORING_CPP__
-#define __COLORING_CPP__
+#ifndef __INCREMENTAL_ALGORITHM_CPP__
+#define __INCREMENTAL_ALGORITHM_CPP__
 
-#include "coloring.h"
+#include "incrementalAlgorithm.h"
 
-std::vector<std::string> split(const std::string &s, char delimiter)
-{
-    std::vector<std::string> tokens;
-    std::string token;
-    std::istringstream tokenStream(s);
-    while (std::getline(tokenStream, token, delimiter))
-    {
-        tokens.push_back(token);
-    }
-    return tokens;
-}
-
-void printPolygon(Polygon_2 points)
-{
-    for (Point_2 p : points)
-        std::cout << p << std::endl;
-}
-
-
-int findPolygonPoint(Polygon_2 polygon, Point_2 point)
-{
-    int index = -1;
-    for (int i = 0; i < polygon.size(); i++)
-    {
-        if (polygon[i] == point)
-        {
-            index = i;
-            return index;
-        }
-    }
-    return index;
-}
 
 void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std::vector<EdgeArea> &visibleEdges)
 {
@@ -83,7 +51,6 @@ void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std
                         {
                             // Found an intersection Segment, therefore the edge in question,
                             // polygon[i] to polygon[(i + 1) % polygon.size()],  is not visible
-                            // std::cout << "Intersecting Segment" << std::endl;
                             isIntersecting = true;
                             break;
                         }
@@ -91,10 +58,7 @@ void findVisibleEdges(Polygon_2 polygon, Point_2 point, ColoredEdge redEdge, std
                     else
                     // If the intersection is a point then the polygon and the triangle
                     // share a vertex, therefore the edge in question can still be visible
-                    {
                         const Point_2 *mutualPoint = boost::get<Point_2>(&*mutual);
-                        // std::cout << "Intersecting Point" << std::endl;
-                    }
                 }
             }
             if (!isIntersecting)
@@ -179,11 +143,13 @@ int findMaxAreaEdge(std::vector<EdgeArea> visibleEdges)
     return index;
 }
 
+Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constructionTime)
+{
+    clock_t start = clock();
+    clock_t end;
 
-void incrementalAlgorithm(Polygon_2 polygon,int edgeSelection)
-{   
     Polygon_2 A;
-    
+
     printPolygon(polygon);
 
     // Insert the first three points to polygon A
@@ -207,7 +173,6 @@ void incrementalAlgorithm(Polygon_2 polygon,int edgeSelection)
             Polygon_2::Segment_2 edge = convexHull.edge(j);
             Point_2 source = edge.source();
             Point_2 target = edge.target();
-
 
             CGAL::Orientation testOrientation = CGAL::orientation(source, target, polygon[i]);
             CGAL::Orientation convHullOrientation = CGAL::orientation(source, target, convexHull[0]);
@@ -316,6 +281,13 @@ void incrementalAlgorithm(Polygon_2 polygon,int edgeSelection)
         }
         std::cout << "---------------------------" << std::endl;
     }
+
+    // Construction time of incremental algorithm in milliseconds
+    end = clock();
+    constructionTime = (end - start) / (double)(CLOCKS_PER_SEC / 1000);
+    std::cout << "Construction Time: " << constructionTime << std::endl;
+
+    return A;
 }
 
-#endif // __COLORING_CPP__
+#endif // __INCREMENTAL_ALGORITHM_H__

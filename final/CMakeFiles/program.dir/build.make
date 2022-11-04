@@ -57,47 +57,77 @@ include CMakeFiles/program.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/program.dir/flags.make
 
-CMakeFiles/program.dir/coloring.cpp.o: CMakeFiles/program.dir/flags.make
-CMakeFiles/program.dir/coloring.cpp.o: coloring.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/program.dir/coloring.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/coloring.cpp.o -c /home/stathis/git/project_dit_emiris/final/coloring.cpp
+CMakeFiles/program.dir/convexHullAlgorithm.cpp.o: CMakeFiles/program.dir/flags.make
+CMakeFiles/program.dir/convexHullAlgorithm.cpp.o: convexHullAlgorithm.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/program.dir/convexHullAlgorithm.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/convexHullAlgorithm.cpp.o -c /home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.cpp
 
-CMakeFiles/program.dir/coloring.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/coloring.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stathis/git/project_dit_emiris/final/coloring.cpp > CMakeFiles/program.dir/coloring.cpp.i
+CMakeFiles/program.dir/convexHullAlgorithm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/convexHullAlgorithm.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.cpp > CMakeFiles/program.dir/convexHullAlgorithm.cpp.i
 
-CMakeFiles/program.dir/coloring.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/coloring.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stathis/git/project_dit_emiris/final/coloring.cpp -o CMakeFiles/program.dir/coloring.cpp.s
+CMakeFiles/program.dir/convexHullAlgorithm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/convexHullAlgorithm.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.cpp -o CMakeFiles/program.dir/convexHullAlgorithm.cpp.s
 
-CMakeFiles/program.dir/incrementalColoring.cpp.o: CMakeFiles/program.dir/flags.make
-CMakeFiles/program.dir/incrementalColoring.cpp.o: incrementalColoring.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/program.dir/incrementalColoring.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/incrementalColoring.cpp.o -c /home/stathis/git/project_dit_emiris/final/incrementalColoring.cpp
+CMakeFiles/program.dir/incrementalAlgorithm.cpp.o: CMakeFiles/program.dir/flags.make
+CMakeFiles/program.dir/incrementalAlgorithm.cpp.o: incrementalAlgorithm.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/program.dir/incrementalAlgorithm.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/incrementalAlgorithm.cpp.o -c /home/stathis/git/project_dit_emiris/final/incrementalAlgorithm.cpp
 
-CMakeFiles/program.dir/incrementalColoring.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/incrementalColoring.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stathis/git/project_dit_emiris/final/incrementalColoring.cpp > CMakeFiles/program.dir/incrementalColoring.cpp.i
+CMakeFiles/program.dir/incrementalAlgorithm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/incrementalAlgorithm.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stathis/git/project_dit_emiris/final/incrementalAlgorithm.cpp > CMakeFiles/program.dir/incrementalAlgorithm.cpp.i
 
-CMakeFiles/program.dir/incrementalColoring.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/incrementalColoring.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stathis/git/project_dit_emiris/final/incrementalColoring.cpp -o CMakeFiles/program.dir/incrementalColoring.cpp.s
+CMakeFiles/program.dir/incrementalAlgorithm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/incrementalAlgorithm.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stathis/git/project_dit_emiris/final/incrementalAlgorithm.cpp -o CMakeFiles/program.dir/incrementalAlgorithm.cpp.s
+
+CMakeFiles/program.dir/main.cpp.o: CMakeFiles/program.dir/flags.make
+CMakeFiles/program.dir/main.cpp.o: main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/program.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/main.cpp.o -c /home/stathis/git/project_dit_emiris/final/main.cpp
+
+CMakeFiles/program.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stathis/git/project_dit_emiris/final/main.cpp > CMakeFiles/program.dir/main.cpp.i
+
+CMakeFiles/program.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stathis/git/project_dit_emiris/final/main.cpp -o CMakeFiles/program.dir/main.cpp.s
+
+CMakeFiles/program.dir/sharedLib.cpp.o: CMakeFiles/program.dir/flags.make
+CMakeFiles/program.dir/sharedLib.cpp.o: sharedLib.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/program.dir/sharedLib.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/program.dir/sharedLib.cpp.o -c /home/stathis/git/project_dit_emiris/final/sharedLib.cpp
+
+CMakeFiles/program.dir/sharedLib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/sharedLib.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stathis/git/project_dit_emiris/final/sharedLib.cpp > CMakeFiles/program.dir/sharedLib.cpp.i
+
+CMakeFiles/program.dir/sharedLib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/sharedLib.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stathis/git/project_dit_emiris/final/sharedLib.cpp -o CMakeFiles/program.dir/sharedLib.cpp.s
 
 # Object files for target program
 program_OBJECTS = \
-"CMakeFiles/program.dir/coloring.cpp.o" \
-"CMakeFiles/program.dir/incrementalColoring.cpp.o"
+"CMakeFiles/program.dir/convexHullAlgorithm.cpp.o" \
+"CMakeFiles/program.dir/incrementalAlgorithm.cpp.o" \
+"CMakeFiles/program.dir/main.cpp.o" \
+"CMakeFiles/program.dir/sharedLib.cpp.o"
 
 # External object files for target program
 program_EXTERNAL_OBJECTS =
 
-program: CMakeFiles/program.dir/coloring.cpp.o
-program: CMakeFiles/program.dir/incrementalColoring.cpp.o
+program: CMakeFiles/program.dir/convexHullAlgorithm.cpp.o
+program: CMakeFiles/program.dir/incrementalAlgorithm.cpp.o
+program: CMakeFiles/program.dir/main.cpp.o
+program: CMakeFiles/program.dir/sharedLib.cpp.o
 program: CMakeFiles/program.dir/build.make
 program: /usr/lib/x86_64-linux-gnu/libmpfr.so
 program: /usr/lib/x86_64-linux-gnu/libgmp.so
 program: CMakeFiles/program.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable program"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/stathis/git/project_dit_emiris/final/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable program"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/program.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

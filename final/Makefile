@@ -123,59 +123,113 @@ program/fast:
 	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/build
 .PHONY : program/fast
 
-coloring.o: coloring.cpp.o
+convexHullAlgorithm.o: convexHullAlgorithm.cpp.o
 
-.PHONY : coloring.o
-
-# target to build an object file
-coloring.cpp.o:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/coloring.cpp.o
-.PHONY : coloring.cpp.o
-
-coloring.i: coloring.cpp.i
-
-.PHONY : coloring.i
-
-# target to preprocess a source file
-coloring.cpp.i:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/coloring.cpp.i
-.PHONY : coloring.cpp.i
-
-coloring.s: coloring.cpp.s
-
-.PHONY : coloring.s
-
-# target to generate assembly for a file
-coloring.cpp.s:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/coloring.cpp.s
-.PHONY : coloring.cpp.s
-
-incrementalColoring.o: incrementalColoring.cpp.o
-
-.PHONY : incrementalColoring.o
+.PHONY : convexHullAlgorithm.o
 
 # target to build an object file
-incrementalColoring.cpp.o:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalColoring.cpp.o
-.PHONY : incrementalColoring.cpp.o
+convexHullAlgorithm.cpp.o:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/convexHullAlgorithm.cpp.o
+.PHONY : convexHullAlgorithm.cpp.o
 
-incrementalColoring.i: incrementalColoring.cpp.i
+convexHullAlgorithm.i: convexHullAlgorithm.cpp.i
 
-.PHONY : incrementalColoring.i
+.PHONY : convexHullAlgorithm.i
 
 # target to preprocess a source file
-incrementalColoring.cpp.i:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalColoring.cpp.i
-.PHONY : incrementalColoring.cpp.i
+convexHullAlgorithm.cpp.i:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/convexHullAlgorithm.cpp.i
+.PHONY : convexHullAlgorithm.cpp.i
 
-incrementalColoring.s: incrementalColoring.cpp.s
+convexHullAlgorithm.s: convexHullAlgorithm.cpp.s
 
-.PHONY : incrementalColoring.s
+.PHONY : convexHullAlgorithm.s
 
 # target to generate assembly for a file
-incrementalColoring.cpp.s:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalColoring.cpp.s
-.PHONY : incrementalColoring.cpp.s
+convexHullAlgorithm.cpp.s:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/convexHullAlgorithm.cpp.s
+.PHONY : convexHullAlgorithm.cpp.s
+
+incrementalAlgorithm.o: incrementalAlgorithm.cpp.o
+
+.PHONY : incrementalAlgorithm.o
+
+# target to build an object file
+incrementalAlgorithm.cpp.o:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalAlgorithm.cpp.o
+.PHONY : incrementalAlgorithm.cpp.o
+
+incrementalAlgorithm.i: incrementalAlgorithm.cpp.i
+
+.PHONY : incrementalAlgorithm.i
+
+# target to preprocess a source file
+incrementalAlgorithm.cpp.i:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalAlgorithm.cpp.i
+.PHONY : incrementalAlgorithm.cpp.i
+
+incrementalAlgorithm.s: incrementalAlgorithm.cpp.s
+
+.PHONY : incrementalAlgorithm.s
+
+# target to generate assembly for a file
+incrementalAlgorithm.cpp.s:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalAlgorithm.cpp.s
+.PHONY : incrementalAlgorithm.cpp.s
+
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+sharedLib.o: sharedLib.cpp.o
+
+.PHONY : sharedLib.o
+
+# target to build an object file
+sharedLib.cpp.o:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/sharedLib.cpp.o
+.PHONY : sharedLib.cpp.o
+
+sharedLib.i: sharedLib.cpp.i
+
+.PHONY : sharedLib.i
+
+# target to preprocess a source file
+sharedLib.cpp.i:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/sharedLib.cpp.i
+.PHONY : sharedLib.cpp.i
+
+sharedLib.s: sharedLib.cpp.s
+
+.PHONY : sharedLib.s
+
+# target to generate assembly for a file
+sharedLib.cpp.s:
+	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/sharedLib.cpp.s
+.PHONY : sharedLib.cpp.s
 
 # Help Target
 help:
@@ -186,12 +240,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... program"
-	@echo "... coloring.o"
-	@echo "... coloring.i"
-	@echo "... coloring.s"
-	@echo "... incrementalColoring.o"
-	@echo "... incrementalColoring.i"
-	@echo "... incrementalColoring.s"
+	@echo "... convexHullAlgorithm.o"
+	@echo "... convexHullAlgorithm.i"
+	@echo "... convexHullAlgorithm.s"
+	@echo "... incrementalAlgorithm.o"
+	@echo "... incrementalAlgorithm.i"
+	@echo "... incrementalAlgorithm.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... sharedLib.o"
+	@echo "... sharedLib.i"
+	@echo "... sharedLib.s"
 .PHONY : help
 
 

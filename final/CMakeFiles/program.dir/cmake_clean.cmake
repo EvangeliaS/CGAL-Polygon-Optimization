@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/program.dir/coloring.cpp.o"
-  "CMakeFiles/program.dir/incrementalColoring.cpp.o"
+  "CMakeFiles/program.dir/convexHullAlgorithm.cpp.o"
+  "CMakeFiles/program.dir/incrementalAlgorithm.cpp.o"
+  "CMakeFiles/program.dir/main.cpp.o"
+  "CMakeFiles/program.dir/sharedLib.cpp.o"
   "program"
   "program.pdb"
 )

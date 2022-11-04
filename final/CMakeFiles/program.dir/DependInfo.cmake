@@ -4,8 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/stathis/git/project_dit_emiris/final/coloring.cpp" "/home/stathis/git/project_dit_emiris/final/CMakeFiles/program.dir/coloring.cpp.o"
-  "/home/stathis/git/project_dit_emiris/final/incrementalColoring.cpp" "/home/stathis/git/project_dit_emiris/final/CMakeFiles/program.dir/incrementalColoring.cpp.o"
+  "/home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.cpp" "/home/stathis/git/project_dit_emiris/final/CMakeFiles/program.dir/convexHullAlgorithm.cpp.o"
+  "/home/stathis/git/project_dit_emiris/final/incrementalAlgorithm.cpp" "/home/stathis/git/project_dit_emiris/final/CMakeFiles/program.dir/incrementalAlgorithm.cpp.o"
+  "/home/stathis/git/project_dit_emiris/final/main.cpp" "/home/stathis/git/project_dit_emiris/final/CMakeFiles/program.dir/main.cpp.o"
+  "/home/stathis/git/project_dit_emiris/final/sharedLib.cpp" "/home/stathis/git/project_dit_emiris/final/CMakeFiles/program.dir/sharedLib.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
