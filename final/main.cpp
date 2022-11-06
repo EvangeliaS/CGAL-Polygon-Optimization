@@ -58,10 +58,8 @@ int main(int argc, char **argv)
         std::vector<std::string> tokens = split(line, '\t');
         polygon.push_back(Point_2(std::stod(tokens[1]), std::stod(tokens[2])));
     }
-    std::cout << "----------------------------" << std::endl;
-    printPolygon(polygon);
-    std::cout << "----------------------------" << std::endl;
-
+ 
+    // Check the edge selection input if the incremental algorithm is chosen
     if (algorithm == "incremental")
     {
         if (initialization == "1a")
@@ -90,9 +88,14 @@ int main(int argc, char **argv)
         }
     }
 
-    if (algorithm == "incremental" || algorithm == "convex_hull")
-    {
-    }
+    Polygon_2 A;
+    int constructionTime = 0;
+
+    // Create the polygon A according to the algorithm chosen by the user
+    if (algorithm == "incremental")
+        A = incrementalAlgorithm(polygon, edgeSelection, constructionTime);
+    else if (algorithm == "convex_hull")
+        A = convexHullAlgorithm(polygon, edgeSelection, constructionTime);
     else if (algorithm == "onion")
     {
         std::cout << "Onion algorithm was not implemented. Choose incremental or convex hull." << std::endl;
@@ -104,38 +107,15 @@ int main(int argc, char **argv)
         return ERROR;
     }
 
-    std::cout << "-------------polygon-------------" << std::endl;
-    printPolygon(polygon);
-    std::cout << "---------------------------------" << std::endl;
-
-    Polygon_2 A;
-    int constructionTime = 0;
-
-    if (algorithm == "incremental")
-        A = incrementalAlgorithm(polygon, edgeSelection, constructionTime);
-    else if (algorithm == "convex_hull")
-        A = convexHullAlgorithm(polygon, edgeSelection, constructionTime);
-    else
-    {
-        std::cout << "Invalid algorithm. Choose incremental or convex_hull." << std::endl;
-        return ERROR;
-    }
-
+    // Compute the area of the convexHull of the point set given
     Polygon_2 convexHull;
     CGAL::convex_hull_2(polygon.begin(), polygon.end(), std::back_inserter(convexHull));
-    // print convex hull area
-    std::cout << "Convex hull area: " << std::abs(convexHull.area()) << std::endl;
 
+    // Compute the area of the polygon A
+    // Find the ratio of the area of A to the area of the convex hull
+    // Write the necessary information to the output file
     writeToOutput(A, std::abs(A.area()), std::abs(A.area()) / std::abs(convexHull.area()), constructionTime, outputFile, algorithm, edgeSelection, initialization);
-
-    const bool simpl = A.is_simple();
-    if (simpl)
-        std::cout << "Simple polygon" << std::endl;
-    else
-    {
-        std::cout << "Not simple" << std::endl;
-    }
-    std::cout << "---------------------------" << std::endl;
+    std::cout << "Done!\nOutput written to " << outputFile << std::endl;
 
     return 0;
 }

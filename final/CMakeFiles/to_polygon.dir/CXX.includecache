@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.cpp
-convexHullAlgorithm.h
-/home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.h
-
 /home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.h
 chrono
 -
@@ -53,10 +49,6 @@ incrementalAlgorithm.h
 /home/stathis/git/project_dit_emiris/final/incrementalAlgorithm.h
 convexHullAlgorithm.h
 /home/stathis/git/project_dit_emiris/final/convexHullAlgorithm.h
-
-/home/stathis/git/project_dit_emiris/final/sharedLib.cpp
-sharedLib.h
-/home/stathis/git/project_dit_emiris/final/sharedLib.h
 
 /home/stathis/git/project_dit_emiris/final/sharedLib.h
 CGAL/Exact_predicates_inexact_constructions_kernel.h

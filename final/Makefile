@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named program
+# Target rules for targets named to_polygon
 
 # Build rule for target.
-program: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 program
-.PHONY : program
+to_polygon: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 to_polygon
+.PHONY : to_polygon
 
 # fast build rule for target.
-program/fast:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/build
-.PHONY : program/fast
+to_polygon/fast:
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/build
+.PHONY : to_polygon/fast
 
 convexHullAlgorithm.o: convexHullAlgorithm.cpp.o
 
@@ -129,7 +129,7 @@ convexHullAlgorithm.o: convexHullAlgorithm.cpp.o
 
 # target to build an object file
 convexHullAlgorithm.cpp.o:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/convexHullAlgorithm.cpp.o
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/convexHullAlgorithm.cpp.o
 .PHONY : convexHullAlgorithm.cpp.o
 
 convexHullAlgorithm.i: convexHullAlgorithm.cpp.i
@@ -138,7 +138,7 @@ convexHullAlgorithm.i: convexHullAlgorithm.cpp.i
 
 # target to preprocess a source file
 convexHullAlgorithm.cpp.i:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/convexHullAlgorithm.cpp.i
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/convexHullAlgorithm.cpp.i
 .PHONY : convexHullAlgorithm.cpp.i
 
 convexHullAlgorithm.s: convexHullAlgorithm.cpp.s
@@ -147,7 +147,7 @@ convexHullAlgorithm.s: convexHullAlgorithm.cpp.s
 
 # target to generate assembly for a file
 convexHullAlgorithm.cpp.s:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/convexHullAlgorithm.cpp.s
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/convexHullAlgorithm.cpp.s
 .PHONY : convexHullAlgorithm.cpp.s
 
 incrementalAlgorithm.o: incrementalAlgorithm.cpp.o
@@ -156,7 +156,7 @@ incrementalAlgorithm.o: incrementalAlgorithm.cpp.o
 
 # target to build an object file
 incrementalAlgorithm.cpp.o:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalAlgorithm.cpp.o
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/incrementalAlgorithm.cpp.o
 .PHONY : incrementalAlgorithm.cpp.o
 
 incrementalAlgorithm.i: incrementalAlgorithm.cpp.i
@@ -165,7 +165,7 @@ incrementalAlgorithm.i: incrementalAlgorithm.cpp.i
 
 # target to preprocess a source file
 incrementalAlgorithm.cpp.i:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalAlgorithm.cpp.i
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/incrementalAlgorithm.cpp.i
 .PHONY : incrementalAlgorithm.cpp.i
 
 incrementalAlgorithm.s: incrementalAlgorithm.cpp.s
@@ -174,7 +174,7 @@ incrementalAlgorithm.s: incrementalAlgorithm.cpp.s
 
 # target to generate assembly for a file
 incrementalAlgorithm.cpp.s:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/incrementalAlgorithm.cpp.s
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/incrementalAlgorithm.cpp.s
 .PHONY : incrementalAlgorithm.cpp.s
 
 main.o: main.cpp.o
@@ -183,7 +183,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -192,7 +192,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -201,7 +201,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 sharedLib.o: sharedLib.cpp.o
@@ -210,7 +210,7 @@ sharedLib.o: sharedLib.cpp.o
 
 # target to build an object file
 sharedLib.cpp.o:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/sharedLib.cpp.o
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/sharedLib.cpp.o
 .PHONY : sharedLib.cpp.o
 
 sharedLib.i: sharedLib.cpp.i
@@ -219,7 +219,7 @@ sharedLib.i: sharedLib.cpp.i
 
 # target to preprocess a source file
 sharedLib.cpp.i:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/sharedLib.cpp.i
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/sharedLib.cpp.i
 .PHONY : sharedLib.cpp.i
 
 sharedLib.s: sharedLib.cpp.s
@@ -228,7 +228,7 @@ sharedLib.s: sharedLib.cpp.s
 
 # target to generate assembly for a file
 sharedLib.cpp.s:
-	$(MAKE) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/sharedLib.cpp.s
+	$(MAKE) -f CMakeFiles/to_polygon.dir/build.make CMakeFiles/to_polygon.dir/sharedLib.cpp.s
 .PHONY : sharedLib.cpp.s
 
 # Help Target
@@ -239,7 +239,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... program"
+	@echo "... to_polygon"
 	@echo "... convexHullAlgorithm.o"
 	@echo "... convexHullAlgorithm.i"
 	@echo "... convexHullAlgorithm.s"

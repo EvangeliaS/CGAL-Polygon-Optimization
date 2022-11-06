@@ -17,7 +17,7 @@ typedef std::pair<EdgeDistance, double> TriangleArea;
 
 // Returns a Polygon_2 of the internal points of polygon (points in polygon but not in A).
 Polygon_2 findInternalPoints(Polygon_2 polygon, Polygon_2 A);
-// Returns a vector of a pair (edge, point) of the minimum distance from every edge of A to its closest point in internalPoints.
+// Returns a vector of pairs (edge, point) of the minimum distances from every edge of A to its closest point in internalPoints.
 std::vector<EdgeDistance> findMinEdgeDistances(Polygon_2 A, Polygon_2 internalPoints);
 // Returns the pair (edge, point), whose triangle's area is the smallest. It also fills triangleAreas vector with all the triangle areas.
 EdgeDistance findMinTriangleArea(Polygon_2 A, std::vector<EdgeDistance> edgeDistances, std::vector<TriangleArea> &triangleAreas);

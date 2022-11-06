@@ -146,12 +146,11 @@ int findMaxAreaEdge(std::vector<EdgeArea> visibleEdges)
 
 Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constructionTime)
 {
+    // Start the clock
     clock_t start = clock();
     clock_t end;
 
     Polygon_2 A;
-
-    printPolygon(polygon);
 
     // Insert the first three points to polygon A
     A.push_back(polygon[0]);
@@ -228,12 +227,6 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
                 }
             }
         }
-        // std::cout << "Visible Edges:" << std::endl;
-        // for (int k = 0; k < visibleEdges.size(); k++)
-        // {
-        //     std::cout << visibleEdges[k].edge << "  -- Area: " << visibleEdges[k].area << " -- Invert: " << visibleEdges[k].invert << std::endl;
-        // }
-
 
         int index = -1;
 
@@ -249,9 +242,6 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
 
         Polygon_2::Segment_2 edge = visibleEdges[index].edge;
 
-        // std::cout << "Chosen Edge: " << edge << std::endl;
-
-
         // Insert the new point to A inbetween the chosen edges' source and target
         if (!visibleEdges[index].invert)
             index = findPolygonPoint(A, edge.target());
@@ -262,8 +252,10 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
         A.insert(A.begin() + index, polygon[i]);
     }
 
-    // Construction time of incremental algorithm in milliseconds
+    // Stop the clock
     end = clock();
+
+    // Construction time of incremental algorithm in milliseconds
     constructionTime = (end - start) / (double)(CLOCKS_PER_SEC / 1000);
 
     return A;
