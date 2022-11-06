@@ -1,11 +1,9 @@
-Assignment 1
-------------
+Assignment 1 - Polygonization of point sets
+-------------------------------------------
 
-- Efstathios Chatziloizos - 1115201800212
-- Evangelia Steiropoulou, 1115201800
+- Efstathios Chatziloizos, 1115201800212
+- Evangelia Steiropoulou, 1115201800186
 
-Polygonization of point set
----------------------------
 
 The program is given a set of points in 2D space and creates a simple
 polygon out of them. The polygon is created according to either the
