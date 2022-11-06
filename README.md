@@ -7,5 +7,4 @@ Stathis' edit
 ## Description
 
 TODO:
-    Remove red vertices
-    Add the new vertex
+    CMakeLists.txt

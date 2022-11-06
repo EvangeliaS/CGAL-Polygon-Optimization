@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/program.dir/convexHullAlgorithm.cpp.o CMakeFiles/program.dir/incrementalAlgorithm.cpp.o CMakeFiles/program.dir/main.cpp.o CMakeFiles/program.dir/sharedLib.cpp.o  -o program  /usr/lib/x86_64-linux-gnu/libmpfr.so /usr/lib/x86_64-linux-gnu/libgmp.so 

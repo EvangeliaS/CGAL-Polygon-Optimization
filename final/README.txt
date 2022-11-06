@@ -19,6 +19,9 @@ Files
 
 - README.txt
 - Makefile
+- report.txt
+    Compares the results for the two algorithms. Different edge
+    selections and initializations are used.
 - main.cpp:
     Simple main that reads the points from the input file, creates the
     polygon based on the parameters specified by the user, using the

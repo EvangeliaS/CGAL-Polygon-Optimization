@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/to_polygon2.dir/convexHullAlgorithm.cpp.o CMakeFiles/to_polygon2.dir/incrementalAlgorithm.cpp.o CMakeFiles/to_polygon2.dir/main.cpp.o CMakeFiles/to_polygon2.dir/sharedLib.cpp.o  -o to_polygon2  /usr/lib/x86_64-linux-gnu/libmpfr.so /usr/lib/x86_64-linux-gnu/libgmp.so 
