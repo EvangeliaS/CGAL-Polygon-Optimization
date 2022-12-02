@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name":"Launch C++ project",
+            "type": "cppdbg",
+            "request": "launch",
+            // program is optimal_polygon
+            // "program": "${workspaceFolder}/optimal_polygon",
+            "program": "${workspaceFolder}/build/optimal_polygon",
+            "args": [
+                "./optimal_polygon",
+                "-i",
+                "instances/data/images/euro-night-0000100.instance",
+                "-o",
+                "output_file.txt",
+                "-algorithm",
+                "convex_hull",
+                "-edge_selection",
+                "3",
+                "-initialization",
+                "2b"
+            ],
+            "environment": [{ "name": "config", "value": "Debug" }],
+            "cwd": "${workspaceFolder}"
+        }
+        
+    ]
+}

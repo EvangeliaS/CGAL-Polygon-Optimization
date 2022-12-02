@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/optimal_polygon.dir/convexHullAlgorithm.cpp.o CMakeFiles/optimal_polygon.dir/incrementalAlgorithm.cpp.o CMakeFiles/optimal_polygon.dir/main.cpp.o CMakeFiles/optimal_polygon.dir/sharedLib.cpp.o  -o optimal_polygon  /usr/lib/x86_64-linux-gnu/libmpfr.so /usr/lib/x86_64-linux-gnu/libgmp.so 
