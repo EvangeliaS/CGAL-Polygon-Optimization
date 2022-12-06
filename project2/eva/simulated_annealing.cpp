@@ -156,25 +156,62 @@ bool validityCheck(Polygon_2 &A, bool isLocal, Point_2& p, Point_2& q, Point_2& 
         kdTree.search(std::back_inserter(result), fuzzyBox);
 
         // Check if any of the edges incident to the point intersects one of the edges pr or qs
-        for (auto it = result.begin(); it != result.end(); ++it)
+        for (auto it = A.begin(); it != A.end(); ++it)
         {
             // Find the position of it in the polygon
             int index = findPolygonPoint(A, *it);
             int indexNext = (index + 1) % A.size();
             int indexPrev = (index == 0) ? A.size() - 1 : index - 1;
 
+            // If it is the point p, q, r, or s, continue
+            if (p == *it || q == *it || r == *it || s == *it)
+            {
+                continue;
+            }
+            // id A[indexPrev] == p,q,r,s or A[indexNext] == p,q,r,s, continue
+            if (A[indexPrev] == p || A[indexPrev] == q || A[indexPrev] == r || A[indexPrev] == s ||
+                A[indexNext] == p || A[indexNext] == q || A[indexNext] == r || A[indexNext] == s)
+            {
+                continue;
+            }
 
             // Construct the segments incident to the point
             Polygon_2::Segment_2 segment1(A[indexPrev], *it);
             Polygon_2::Segment_2 segment2(*it, A[indexNext]);
 
             // Check if the segments intersect pr or qs
-            if (CGAL::do_intersect(segment1, pr) || CGAL::do_intersect(segment1, qs) ||
-                CGAL::do_intersect(segment2, pr) || CGAL::do_intersect(segment2, qs))
+            // if (CGAL::do_intersect(segment1, pr) || CGAL::do_intersect(segment1, qs) ||
+            //     CGAL::do_intersect(segment2, pr) || CGAL::do_intersect(segment2, qs))
+            // {
+                
+            //     // std::cout << "pr and qs are intersecting" << std::endl;
+            //     return false;
+            // }
+            if (CGAL::do_intersect(segment1, pr))
             {
-                // std::cout << "pr and qs are intersecting" << std::endl;
+                // Print segment1.source() and segment1.target(), pr.source() and pr.target()
+                std::cout << "Intersection: " << segment1.source() << "  "  <<  segment1.target() << ", " << pr.source() << "   " << pr.target() << std::endl;
                 return false;
             }
+            if (CGAL::do_intersect(segment1, qs))
+            {
+                // Print segment1.source() and segment1.target(), qs.source() and qs.target()
+                std::cout << "Intersection: " << segment1.source() << "  "  <<  segment1.target() << ", " << qs.source() << "   " << qs.target() << std::endl;
+                return false;
+            }
+            if (CGAL::do_intersect(segment2, pr))
+            {
+                // Print segment2.source() and segment2.target(), pr.source() and pr.target()
+                std::cout << "Intersection: " << segment2.source() << "  "  <<  segment2.target() << ", " << pr.source() << "   " << pr.target() << std::endl;
+                return false;
+            }
+            if (CGAL::do_intersect(segment2, qs))
+            {
+                // Print segment2.source() and segment2.target(), qs.source() and qs.target()
+                std::cout << "Intersection: " << segment2.source() << "  "  <<  segment2.target() << ", " << qs.source() << "   " << qs.target() << std::endl;
+                return false;
+            }
+    
         }
         std::cout << "Here" << std::endl;
 
@@ -186,7 +223,14 @@ bool validityCheck(Polygon_2 &A, bool isLocal, Point_2& p, Point_2& q, Point_2& 
 
 
     }
-
+    if(A.is_simple())
+    {
+        // return true;
+    }
+    else
+    {
+        std::cout << "A is not simple" << std::endl;
+    }
     return true;
     // if(A.is_simple())
     // {
