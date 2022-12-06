@@ -1,4 +1,7 @@
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Search_traits_2.h>
+#include <CGAL/Iso_rectangle_2.h>
+#include <CGAL/Fuzzy_iso_box.h>
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/intersections.h>
 #include <CGAL/Polygon_2.h>
@@ -6,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <time.h>
+#include <CGAL/Kd_tree.h>
 
 #include "sharedLib.h"
 #include "incrementalAlgorithm.h"
