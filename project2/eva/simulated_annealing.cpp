@@ -403,70 +403,12 @@ int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_
     return 0;
 }
 
-int spatialSubdivision(Polygon_2 &polygon, int m)
-{
-    /*    if(polygon.size()<1000){
-            std::cout << "Please input a bigger polygon (>1000 points)" << std::endl;
-            return ERROR;
-        }*/
-    // Sort in lexicographic order -x
-    std::sort(polygon.begin(), polygon.end(), [](Point_2 p1, Point_2 p2)
-              { return p1.x() < p2.x(); });
-    printPolygon(polygon);
 
-    // Number of subsets
-    int k = std::ceil((polygon.size() - 1) / m - 1);
-    std::cout << "K " << k << std::endl;
-
-    // Perform global search on every subpolygon
-    int i = 0;
-    bool isFirst_subpolygon = true;
-    Point_2 rightmost, leftmost;
-    std::vector<Polygon_2> subsets;
-
-    // For every point of the pointset
-    while (i < polygon.size())
-    {
-        // create subpolygon
-        for (auto it = polygon.begin() + i; it != polygon.end() && it != polygon.begin() + i + m; ++it)
-        {
-            if (!isFirst_subpolygon)
-            {
-                // check if the point between two subpolygons has y bigger than its prev and next points
-                if (!(polygon[findPolygonPoint(polygon, rightmost)].y() > polygon[findPolygonPoint(polygon, rightmost) + 1].y() && polygon[findPolygonPoint(polygon, rightmost)].y() > polygon[findPolygonPoint(polygon, rightmost) - 1].y()))
-                {
-                    std::cout << " prev " << polygon[findPolygonPoint(polygon, rightmost) - 1] << " rightmost of s-1 " << rightmost << " next " << polygon[findPolygonPoint(polygon, rightmost) + 1] << std::endl;
-                }
-            }
-            subsets[0].push_back(*it);
-        }
-        std::cout << "_____________________________________________" << std::endl;
-        printPolygon(subsets[0]);
-
-        if (isFirst_subpolygon)
-        {
-            // std::cout << "last point " << subpolygon[subpolygon.size() - 1] << " rightmost ";
-            rightmost = *(right_vertex_2(subsets[0].begin(), subsets[0].end()));
-        }
-        else
-        {
-            leftmost = *(left_vertex_2(subsets[0].begin(), subsets[0].end()));
-            rightmost = *(right_vertex_2(subsets[0].begin(), subsets[0].end()));
-            // std::cout << "first point " << subpolygon[0] << " leftmost "  << *(left_vertex_2(subpolygon.begin(), subpolygon.end()));;
-        }
-
-        isFirst_subpolygon = false;
-
-        i += m - 1;
-    }
-    return true;
-}
-
-
-void spDiv(Polygon_2 &pointset)
+void spatialSubdivision(Polygon_2 &pointset)
 {
     std::vector<Polygon_2> subsets;
     splitIntoSubsets(pointset, subsets);
+
 
     // print subsets
     for(int i = 0; i < subsets.size(); i++)
@@ -474,6 +416,13 @@ void spDiv(Polygon_2 &pointset)
         std::cout << "----------------------- Subset " << i << "-----------------------" << std::endl;
         printPolygon(subsets[i]);
     }
+    std::cout << "\n\n\n\n\n\n\n" << std::endl;
+    int constructionTime = 0;
+    Polygon_2 A = incrementalAlgorithm(pointset, 3, constructionTime, true);
+    std::cout << "----------------------- A -----------------------" << std::endl;
+    printPolygon(A);
+    std::cout << "----------------------- pointset -----------------------" << std::endl;
+    printPolygon(pointset);
 }
 
 void splitIntoSubsets(Polygon_2& pointset, std::vector<Polygon_2>& subsets)

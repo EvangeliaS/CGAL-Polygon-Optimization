@@ -129,6 +129,31 @@ int findMinAreaEdge(std::vector<EdgeArea> visibleEdges)
     return index;
 }
 
+int findSecondMinAreaEdge(std::vector<EdgeArea> visibleEdges)
+{
+    int index = 0;
+    double minArea = visibleEdges[0].area;
+    for (int i = 1; i < visibleEdges.size(); i++)
+    {
+        if (visibleEdges[i].area < minArea)
+        {
+            minArea = visibleEdges[i].area;
+            index = i;
+        }
+    }
+    index = -1;
+    double secondMinArea = visibleEdges[0].area;
+    for (int i = 1; i < visibleEdges.size(); i++)
+    {
+        if (visibleEdges[i].area < secondMinArea && visibleEdges[i].area != minArea)
+        {
+            secondMinArea = visibleEdges[i].area;
+            index = i;
+        }
+    }
+    return index;
+}
+
 int findMaxAreaEdge(std::vector<EdgeArea> visibleEdges)
 {
     int index = 0;
@@ -144,7 +169,32 @@ int findMaxAreaEdge(std::vector<EdgeArea> visibleEdges)
     return index;
 }
 
-Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constructionTime)
+int findSecondMaxAreaEdge(std::vector<EdgeArea> visibleEdges)
+{
+    int index = 0;
+    double maxArea = visibleEdges[0].area;
+    for (int i = 1; i < visibleEdges.size(); i++)
+    {
+        if (visibleEdges[i].area > maxArea)
+        {
+            maxArea = visibleEdges[i].area;
+            index = i;
+        }
+    }
+    index = -1;
+    double secondMaxArea = visibleEdges[0].area;
+    for (int i = 1; i < visibleEdges.size(); i++)
+    {
+        if (visibleEdges[i].area > secondMaxArea && visibleEdges[i].area != maxArea)
+        {
+            secondMaxArea = visibleEdges[i].area;
+            index = i;
+        }
+    }
+    return index;
+}
+
+Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constructionTime, bool isSpatialSubdivision)
 {
     // Start the clock
     clock_t start = clock();
@@ -241,6 +291,37 @@ Polygon_2 incrementalAlgorithm(Polygon_2 polygon, int edgeSelection, int &constr
             index = findMaxAreaEdge(visibleEdges);
 
         Polygon_2::Segment_2 edge = visibleEdges[index].edge;
+        
+        if(isSpatialSubdivision)
+        {
+            // If edge is comprised of the first and second points of the polygon or the last and second to last points of the polygon
+            // during spatial subdivision, choose the second best edge
+            if ((edge.has_on(polygon[0]) && edge.has_on(polygon[1]) && edgeSelection == 2)
+            || (edge.has_on(polygon[polygon.size() - 1]) && edge.has_on(polygon[polygon.size() - 2]) && edgeSelection == 2))
+            {
+                std::cout << "Spatial Subdivision - Second Best Edge" << std::endl;
+                index = findSecondMinAreaEdge(visibleEdges);
+                if (index == -1)
+                {
+                    std::cout << "Error: During polygonization with spatial subdivision, the second best edge could not be found. (So as to meet the LH conditions." << std::endl;
+                    index = findMinAreaEdge(visibleEdges);
+                }
+                edge = visibleEdges[index].edge;
+            }
+
+            if((edge.has_on(polygon[0]) && edge.has_on(polygon[1]) && edgeSelection == 3)
+            || (edge.has_on(polygon[polygon.size() - 1]) && edge.has_on(polygon[polygon.size() - 2]) && edgeSelection == 3))
+            {
+                std::cout << "Spatial Subdivision - Second Best Edge" << std::endl;
+                index = findSecondMaxAreaEdge(visibleEdges);
+                if (index == -1)
+                {
+                    std::cout << "Error: During polygonization with spatial subdivision, the second best edge could not be found. (So as to meet the LH conditions." << std::endl;
+                    index = findMaxAreaEdge(visibleEdges);
+                }
+                edge = visibleEdges[index].edge;
+            }
+        }
 
         // Insert the new point to A inbetween the chosen edges' source and target
         if (!visibleEdges[index].invert)
