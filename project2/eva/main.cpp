@@ -149,7 +149,9 @@ printPolygon(B);
     printPolygon(A);
     //Polygon_2 convex_hull;
     
-    minimization_algorithm(A, isLocalStep, 10000,isMaximization);
+    // minimization_algorithm(A, isLocalStep, 10000,isMaximization);
+    // spatialSubdivision(A, 10);
+    spDiv(polygon);
 
     //local_transition_step(temp, a);
     //std::cout << "a = " << a << std::endl;

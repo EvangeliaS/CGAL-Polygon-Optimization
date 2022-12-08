@@ -15,6 +15,7 @@
 #include "incrementalAlgorithm.h"
 #include "convexHullAlgorithm.h"
 
+bool checkSegmentsIntersect(Polygon_2::Segment_2 segment, Polygon_2::Segment_2 pr, bool isFirst);
 
 int swap_polygon_points(Polygon_2 &polygon, int indexA, int indexB, bool islastpoint);
 
@@ -31,3 +32,11 @@ double compute_deltaEnergy(double finalEnergy, double initialEnergy);
 bool Metropolis_criterion(double deltaEnergy, double T);
 
 int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_Maximization);
+
+int spatialSubdivision(Polygon_2 &polygon, int m);
+
+void spDiv(Polygon_2 &pointset);
+
+void splitIntoSubsets(Polygon_2& pointset, std::vector<Polygon_2>& subsets);
+
+
