@@ -143,15 +143,15 @@ printPolygon(B);
     else
         std::cout << "Polygon A is  simple" << std::endl;
 
-    bool isMaximization = true;
+    bool isMaximization = false;
     bool isLocalStep = true;
 
     printPolygon(A);
     //Polygon_2 convex_hull;
     
-    // minimization_algorithm(A, isLocalStep, 10000,isMaximization);
+    minimization_algorithm(A, isLocalStep, 10000, isMaximization);
     // spatialSubdivision(A, 10);
-    spatialSubdivision(polygon);
+    // spatialSubdivision(polygon);
 
     //local_transition_step(temp, a);
     //std::cout << "a = " << a << std::endl;

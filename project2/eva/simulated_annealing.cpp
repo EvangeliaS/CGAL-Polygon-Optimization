@@ -50,27 +50,54 @@ int local_transition_step(Polygon_2 &polygon, int indexA)
     }
 }
 // local transition step: swaps the position of two randomply selected polygon points
-int global_transition_step(Polygon_2 &polygon)
+bool globalStep(Polygon_2 &A)
 {
     // Choose q and s randomly
-    int index_q = 0;
-    int index_s = 0;
-    index_q = rand() % (polygon.size() - 1);
+    int q = 0;
+    int s = 0;
+    q = rand() % (A.size());
     while (1)
     {
-        index_s = rand() % (polygon.size() - 1);
-        if (index_q != index_s)
+        s = rand() % (A.size());
+        if (q != s)
         {
             break;
         }
     }
-    // std::cout << "index_s " << index_s << " " << " index_q " << index_q << std::endl;
+
+    // Vertex p is the previous vertex of q, if q is the first vertex of A, p is the last vertex of A
+    int p = (q == 0) ? A.size() - 1 : q - 1;
+
+    // Vertex r is the next vertex of q
+    int r = (q + 1) % A.size();
+
+    // Vertex t is the next vertex of s
+    int t = (s + 1) % A.size();
+
+    // The two orders are: pqr and st
+    
+    Polygon_2 saveA = A;
 
     // Insert vertex q after vertex s
-    polygon.insert(polygon.vertices_begin() + index_s + 1, polygon[index_q]);
+    A.insert(A.vertices_begin() + s + 1, A[q]);
     // Erase point q from polygon(initial place)
-    polygon.erase(polygon.vertices_begin() + index_q);
-    return 0;
+    A.erase(A.vertices_begin() + q);
+
+    // if(!validityCheckGlobal(A, saveA[p], saveA[q], saveA[r], saveA[s], saveA[t]))
+    // // Validity check
+    // {
+    //     A = saveA;
+    //     return false;
+    // }
+    
+    // If polygon is not simple, revert to the initial polygon
+    if (!A.is_simple())
+    {
+        A = saveA;
+        return false;
+    }
+
+    return true;
 }
 
 double Energy_of_State_P(Polygon_2 polygon, Polygon_2 convex_hull, bool is_Maximization)
@@ -115,157 +142,91 @@ bool Metropolis_criterion(double deltaEnergy, double T)
     return false;
 }
 
-bool validityCheck(Polygon_2 &A, bool isLocal, Point_2 &p, Point_2 &q, Point_2 &r, Point_2 &s, CGAL::Kd_tree<CGAL::Search_traits_2<Kernel>> &kdTree)
+bool validityCheckLocal(Polygon_2 &A, Point_2 &p, Point_2 &q, Point_2 &r, Point_2 &s, CGAL::Kd_tree<CGAL::Search_traits_2<Kernel>> &kdTree)
 {
-    // if(isLocal)
-    // {
-    //     // A)  Check if pr and qs are intersecting
-    //     Polygon_2::Segment_2 pr(p, r);
-    //     Polygon_2::Segment_2 qs(q, s);
+    // A)  Check if pr and qs are intersecting
 
-    //     // // Check if pr and qs are intersecting
-    //     if (CGAL::do_intersect(pr, qs))
-    //     {
-    //         std::cout << "pr and qs are intersecting" << std::endl;
-    //         return false;
-    //     }
+    //Construct the segments pr and qs
+    Polygon_2::Segment_2 pr(p, r);
+    Polygon_2::Segment_2 qs(q, s);
 
-    //     // B)
-    //     // A range-search query is performed, where the query is the rectangular
-    //     // axis-parallel bounding box. For every point located in the range, test
-    //     // whether one of the edges incident to the point intersects one of the edges pr or qs.
-
-    //     //  we check whether either of the edges
-    //     // pr or qs intersect any other segment in the polygonal chain as follows: we submit a range-search
-    //     // query, where the query range is the rectangular axis-parallel bounding box of the points p, q, r,
-    //     // and s. For every point located in the range, we test whether one of the two segments incident to
-    //     // the point intersects one of pr or qs
-
-    //     // Construct a rectangle with the points p, q, r, and s
-    //     Polygon_2::Point_2 minPoint(std::min(p.x(), std::min(q.x(), std::min(r.x(), s.x()))),
-    //                                 std::min(p.y(), std::min(q.y(), std::min(r.y(), s.y()))));
-    //     Polygon_2::Point_2 maxPoint(std::max(p.x(), std::max(q.x(), std::max(r.x(), s.x()))),
-    //                                 std::max(p.y(), std::max(q.y(), std::max(r.y(), s.y()))));
-
-    //     // Construct the fuzzy box
-    //     CGAL::Fuzzy_iso_box<CGAL::Search_traits_2<Kernel>> fuzzyBox(minPoint, maxPoint);
-
-    //     // Perform the range search
-    //     std::list<Point_2> result;
-    //     kdTree.search(std::back_inserter(result), fuzzyBox);
-
-    //     // Check if any of the edges incident to the point intersects one of the edges pr or qs
-    //     for (auto it = result.begin(); it != result.end(); ++it)
-    //     {
-    //         // Find the position of it in the polygon
-    //         int index = findPolygonPoint(A, *it);
-    //         int indexNext = (index + 1) % A.size();
-    //         int indexPrev = (index == 0) ? A.size() - 1 : index - 1;
-
-    //         // If it is the point p, q, r, or s, continue
-    //         // if (p == *it || q == *it || r == *it || s == *it)
-    //         // {
-    //         //     continue;
-    //         // }
-    //         // id A[indexPrev] == p,q,r,s or A[indexNext] == p,q,r,s, continue
-    //         // if (A[indexPrev] == p || A[indexPrev] == q || A[indexPrev] == r || A[indexPrev] == s ||
-    //         //     A[indexNext] == p || A[indexNext] == q || A[indexNext] == r || A[indexNext] == s)
-    //         // {
-    //         //     continue;
-    //         // }
-
-    //         // Construct the segments incident to the point
-    //         Polygon_2::Segment_2 segment1(A[indexPrev], *it);
-    //         Polygon_2::Segment_2 segment2(*it, A[indexNext]);
-
-    //         // Ignore the edges pq and rs
-    //         Polygon_2::Segment_2 pq(p, q);
-    //         Polygon_2::Segment_2 rs(r, s);
-    //         if (segment1 == pq || segment1 == rs || segment2 == pq || segment2 == rs)
-    //         {
-    //             std::cout << "Ignoring pq or rs" << std::endl;
-    //             continue;
-    //         }
-
-    //         if(checkSegmentsIntersect(segment1, pr, true))
-    //             return false;
-    //         if(checkSegmentsIntersect(segment2, pr, true))
-    //             return false;
-    //         if(checkSegmentsIntersect(segment1, qs, false))
-    //             return false;
-    //         if(checkSegmentsIntersect(segment2, qs, false))
-    //             return false;
-
-    //         // Check if the segments intersect pr or qs
-    //         // if (CGAL::do_intersect(segment1, pr) || CGAL::do_intersect(segment1, qs) ||
-    //         //     CGAL::do_intersect(segment2, pr) || CGAL::do_intersect(segment2, qs))
-    //         // {
-
-    //         //     // std::cout << "pr and qs are intersecting" << std::endl;
-    //         //     return false;
-    //         // }
-    //         // if (CGAL::do_intersect(segment1, pr))
-    //         // {
-    //         //     // Print segment1.source() and segment1.target(), pr.source() and pr.target()
-    //         //     std::cout << "Intersection: " << segment1.source() << "  "  <<  segment1.target() << ", " << pr.source() << "   " << pr.target() << std::endl;
-    //         //     return false;
-    //         // }
-    //         // if (CGAL::do_intersect(segment1, qs))
-    //         // {
-    //         //     // Print segment1.source() and segment1.target(), qs.source() and qs.target()
-    //         //     std::cout << "Intersection: " << segment1.source() << "  "  <<  segment1.target() << ", " << qs.source() << "   " << qs.target() << std::endl;
-    //         //     return false;
-    //         // }
-    //         // if (CGAL::do_intersect(segment2, pr))
-    //         // {
-    //         //     // Print segment2.source() and segment2.target(), pr.source() and pr.target()
-    //         //     std::cout << "Intersection: " << segment2.source() << "  "  <<  segment2.target() << ", " << pr.source() << "   " << pr.target() << std::endl;
-    //         //     return false;
-    //         // }
-    //         // if (CGAL::do_intersect(segment2, qs))
-    //         // {
-    //         //     // Print segment2.source() and segment2.target(), qs.source() and qs.target()
-    //         //     std::cout << "Intersection: " << segment2.source() << "  "  <<  segment2.target() << ", " << qs.source() << "   " << qs.target() << std::endl;
-    //         //     return false;
-    //         // }
-
-    //     }
-    //     std::cout << "Here" << std::endl;
-
-    // }
-    // if(A.is_simple())
-    // {
-    //     // return true;
-    // }
-    // else
-    // {
-    //     std::cout << "A is not simple" << std::endl;
-    //     std::cout << "---------A---------" << std::endl;
-    //     printPolygon(A);
-    //     std::cout << "-------------------" << std::endl;
-    //     //print p, q, r, s
-    //     std::cout << "p: " << p << std::endl;
-    //     std::cout << "q: " << q << std::endl;
-    //     std::cout << "r: " << r << std::endl;
-    //     std::cout << "s: " << s << std::endl;
-
-    // }
-    // return true;
-    if (A.is_simple())
+    // The validity check is false if the segments pr and qs intersect
+    if (CGAL::do_intersect(pr, qs))
     {
-        return true;
+        return false;
     }
-    return false;
+
+    // B)
+    // A range-search query is performed, where the query is the rectangular
+    // axis-parallel bounding box. For every point located in the range, test
+    // whether one of the edges incident to the point intersects one of the edges pr or qs.
+
+    // we check whether either of the edges
+    // pr or qs intersect any other segment in the polygonal chain as follows: we submit a range-search
+    // query, where the query range is the rectangular axis-parallel bounding box of the points p, q, r,
+    // and s. For every point located in the range, we test whether one of the two segments incident to
+    // the point intersects one of pr or qs
+
+    // Construct a rectangle with the points p, q, r, and s
+    Polygon_2::Point_2 minPoint(std::min(p.x(), std::min(q.x(), std::min(r.x(), s.x()))),
+                                std::min(p.y(), std::min(q.y(), std::min(r.y(), s.y()))));
+    Polygon_2::Point_2 maxPoint(std::max(p.x(), std::max(q.x(), std::max(r.x(), s.x()))),
+                                std::max(p.y(), std::max(q.y(), std::max(r.y(), s.y()))));
+
+    // Construct the fuzzy box
+    CGAL::Fuzzy_iso_box<CGAL::Search_traits_2<Kernel>> fuzzyBox(minPoint, maxPoint);
+
+    // Perform the range search
+    std::list<Point_2> result;
+    kdTree.search(std::back_inserter(result), fuzzyBox);
+
+    // Check if any of the edges incident to the point intersects one of the edges pr or qs
+    for (auto it = result.begin(); it != result.end(); ++it)
+    {
+        for (auto it2 = A.edges_begin(); it2 != A.edges_end(); ++it2)
+        {
+            // If the edge is incident to the point
+            if (it2->source() == *it || it2->target() == *it)
+            {
+                // If the edge intersects pr or qs
+                if (checkSegmentsIntersect(*it2, pr) || checkSegmentsIntersect(*it2, qs))
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
+
+    if(A.is_simple())
+    {
+        // return true;
+    }
+    else
+    {
+        std::cout << "A is not simple" << std::endl;
+        std::cout << "---------A---------" << std::endl;
+        printPolygon(A);
+        std::cout << "-------------------" << std::endl;
+        //print p, q, r, s
+        std::cout << "p: " << p << std::endl;
+        std::cout << "q: " << q << std::endl;
+        std::cout << "r: " << r << std::endl;
+        std::cout << "s: " << s << std::endl;
+
+    }
+    return true;
+    // if (A.is_simple())
+    // {
+    //     return true;
+    // }
+    // return false;
 }
 
-void localStep(Polygon_2 &A, CGAL::Kd_tree<CGAL::Search_traits_2<Kernel>> &kdTree)
+bool localStep(Polygon_2 &A, CGAL::Kd_tree<CGAL::Search_traits_2<Kernel>> &kdTree)
 {
-    // std::cout << "---------A---------" << std::endl;
-    // printPolygon(A);
-    // std::cout << "-------------------" << std::endl;
     // Choose a random vertex q ∈ A
     int q = rand() % A.size();
-
     // Vertex r is the next vertex of q
     int r = (q + 1) % A.size();
     // Vertex p is the previous vertex of q, if q is the first vertex of A, p is the last vertex of A
@@ -275,18 +236,17 @@ void localStep(Polygon_2 &A, CGAL::Kd_tree<CGAL::Search_traits_2<Kernel>> &kdTre
 
     // So the final order of the vertices is p, q, r, s
 
-    // print the vertices' indices
-    // std::cout << "p: " << p << " q: " << q << " r: " << r << " s: " << s << std::endl;
-
-    // Swap the vertices q and r
-    std::swap(A[q], A[r]);
-
-    if (!validityCheck(A, true, A[p], A[q], A[r], A[s], kdTree))
-        // Swap them back
+    // Check if swapping q and r is valid
+    if (validityCheckLocal(A, A[p], A[q], A[r], A[s], kdTree))
+    {
+        // Swap them if it is valid
         std::swap(A[q], A[r]);
+        return true;
+    }
+    return false;
 }
 
-bool checkSegmentsIntersect(Polygon_2::Segment_2 segment, Polygon_2::Segment_2 pr, bool isFirst)
+bool checkSegmentsIntersect(Polygon_2::Segment_2 segment, Polygon_2::Segment_2 pr)
 {
     const auto mutual = CGAL::intersection(segment, pr);
     if (mutual)
@@ -294,51 +254,57 @@ bool checkSegmentsIntersect(Polygon_2::Segment_2 segment, Polygon_2::Segment_2 p
         // If the intersection is a Segment
         if (const Polygon_2::Segment_2 *mutualSegment = boost::get<Polygon_2::Segment_2>(&*mutual))
         {
-            // // Check if the mutualSegment is the same as the edge and ignore it
-            // if (mutualSegment->source() == pr.source() && mutualSegment->target() == pr.target())
-            // {
+            // Check if the mutualSegment is the same as pr and ignore it
+            if(*mutualSegment == pr)
+            {
+                return false;
+            }
+            // if(mutualSegment->source() == segment.target() && mutualSegment->target() == segment.source())
             //     return false;
-            // }
-            // else
-            // {
-            //     // Found an intersection Segment, therefore the new polygon cannot be valid
-            //     return true;
-            // }
-            std::cout << "MUTUAL SEGMENT" << std::endl;
+            // std::cout << "MUTUAL SEGMENT" << std::endl;
             return true;
         }
         else
         {
             // If the intersection is a Point
             const Point_2 *mutualPoint = boost::get<Point_2>(&*mutual);
-            // Check if the mutualPoint is the same as p ignore it
-            if (isFirst && mutualPoint->x() == pr.source().x() && mutualPoint->y() == pr.source().y())
-            {
-                std::cout << "isFirst" << std::endl;
+
+            // If the mutualPoint is the same as p or r ignore it
+            if(*mutualPoint == pr.source() || *mutualPoint == pr.target())
                 return false;
-            }
-            // // Check if the mutualPoint is the same as r ignore it
-            else if (!isFirst && mutualPoint->x() == pr.target().x() && mutualPoint->y() == pr.target().y())
-            {
-                std::cout << "isSecond" << std::endl;
-                return false;
-            }
             else
-            {
-                // print the 2 segments and the mutualPoint
-                std::cout << "segment: " << segment.source() << " " << segment.target() << ", pr: " << pr.source() << " " << pr.target() << ", mutualPoint: " << *mutualPoint << std::endl;
+            // If a mutualPoint different from p and r is found, the new polygon cannot be valid
                 return true;
-            }
         }
     }
     return false;
+}
+
+bool validityCheckGlobal(Polygon_2 &A, Point_2& p, Point_2& q, Point_2& r, Point_2& s, Point_2& t)
+{
+    // Construct the segments pr, sq, qt
+    Polygon_2::Segment_2 pr(p, r);
+    Polygon_2::Segment_2 sq(s, q);
+    Polygon_2::Segment_2 qt(q, t);
+
+    // Check if pr intersects sq or qt
+    if (CGAL::do_intersect(pr, sq) || CGAL::do_intersect(pr, qt))
+        return false;
+
+    // Check if each of these new segments intersects any of the edges of A
+    for (auto it = A.edges_begin(); it != A.edges_end(); ++it)
+    {
+        if (checkSegmentsIntersect(pr, *it) || checkSegmentsIntersect(sq, *it) || checkSegmentsIntersect(qt, *it))
+            return false;
+    } 
+
+    return true;
 }
 
 int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_Maximization)
 {
     double T = 1.0;
     Polygon_2 save_polygon = polygon;
-    Polygon_2 save_polygon_for_Metropolis = polygon; // if polygon is not accepted by metropolis criterion
 
     std::cout << " Initial area of polygon: " << std::abs(polygon.area()) << std::endl;
     Polygon_2 convex_hull;
@@ -353,31 +319,13 @@ int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_
         CGAL::Kd_tree<CGAL::Search_traits_2<Kernel>> kdTree(polygon.begin(), polygon.end());
         if (isLocalStep)
         {
-            localStep(polygon, kdTree);
-            // int index = rand() % polygon.size();
-
-            // if (!local_transition_step(polygon, index) && polygon.is_simple())
-            // { // check validity with kd-tree
-            //     // std::cout << " Local transision step is successful " << index << std::endl;
-            // }
-            // else
-            // { // Polygon is not valid: (goto 4)
-            //     // std::cout << "Not valid " << index << std::endl;
-            //     polygon = save_polygon;
-            //     continue;
-            // }
+            if(!localStep(polygon, kdTree))
+                continue;
         }
         else
-        { // global transition step -- //check validity with intersect
-            if (!global_transition_step(polygon) && polygon.is_simple())
-            {
-                // std::cout << " Global transision step is successful " << std::endl;
-            }
-            else
-            { // Polygon is not valid: (goto 4)
-                polygon = save_polygon;
+        {
+            if(!globalStep(polygon))
                 continue;
-            }
         }
 
         Polygon_2 convex_hull;
@@ -399,6 +347,11 @@ int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_
             polygon = save_polygon;
         }
         T -= 1 / (double)L;
+        // is polygon simple
+        if (!polygon.is_simple())
+        {
+            std::cout << " Polygon is not simple " << std::endl;
+        }
     }
     return 0;
 }
