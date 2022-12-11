@@ -1,3 +1,0 @@
-/home/stathis/git/project_dit_emiris/project2/changed/CMakeFiles/rebuild_cache.dir
-/home/stathis/git/project_dit_emiris/project2/changed/CMakeFiles/edit_cache.dir
-/home/stathis/git/project_dit_emiris/project2/changed/CMakeFiles/optimal_polygon.dir
