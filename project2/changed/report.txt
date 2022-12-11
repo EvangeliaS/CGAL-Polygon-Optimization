@@ -1,0 +1,353 @@
+We tested multiple files from the given instances, on Linux environment.
+Μany examples were tested and based on them
+we extracted the results. Some of the examples are stated below:
+
+********************************************************************************
+
+-----------------------------LOCAL_SEARCH-------------------------------
+
+./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm local_search -L 10 -min -threshold -10 -annealing local -initialization_algorithm convex_hull
+
+Algorithm: local_search_-min
+area_initial 2.0778e+07
+area: 1.18259e+07
+ratio_initial 0.275268
+ratio: 0.156671
+construction time: 19601
+
+./optimal_polygon –i /instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm local_search -L 3 -min -threshold -10 -annealing local -initialization_algorithm convex_hull
+Algorithm: local_search_-min
+area_initial 2.0778e+07
+area: 1.18259e+07
+ratio_initial 0.275268
+ratio: 0.156671
+construction time: 5775
+
+
+./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm local_search -L 10 -max -threshold 10 -annealing local -initialization_algorithm convex_hull
+Algorithm: local_search_-max
+area_initial 6.7847e+07
+area: 6.98424e+07
+ratio_initial 0.89884
+ratio: 0.925276
+construction time: 14667
+
+./optimal_polygon –i /instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm local_search -L 3 -max -threshold 10 -annealing local -initialization_algorithm convex_hull
+
+Algorithm: local_search_-max
+area_initial 6.7847e+07
+area: 6.98424e+07
+ratio_initial 0.89884
+ratio: 0.925276
+construction time: 4241
+
+./optimal_polygon –i ../instances/data/images/euro-night-0000500.instance –ο output.txt –algorithm local_search -L 3 -min -threshold -10 -annealing local -initialization_algorithm convex_hull
+
+----------------------------SIMULATED_ANNEALING----------------------------
+
+./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 1000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 5.78632e+07
+area: 6.11942e+07
+ratio_initial 0.766575
+ratio: 0.810704
+construction time: 128
+
+./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 1000 -max -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 5.78632e+07
+area: 6.18119e+07
+ratio_initial 0.766575
+ratio: 0.818888
+construction time: 775
+
+./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 5000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 5.78632e+07
+area: 6.25574e+07
+ratio_initial 0.766575
+ratio: 0.828764
+construction time: 584
+
+ ./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 5000 -max -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 5.78632e+07
+area: 5.9953e+07
+ratio_initial 0.766575
+ratio: 0.79426
+construction time: 4367
+
+./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 1000 -min -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-min
+area_initial 1.85541e+07
+area: 1.79891e+07
+ratio_initial 0.245806
+ratio: 0.238321
+construction time: 143
+
+
+./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 5000 -min -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-min
+area_initial 1.85541e+07
+area: 1.73236e+07
+ratio_initial 0.245806
+ratio: 0.229505
+construction time: 666
+
+ ./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 5000 -min -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-min
+area_initial 1.85541e+07
+area: 1.55091e+07
+ratio_initial 0.245806
+ratio: 0.205466
+construction time: 4040
+
+___________________________________________________________________________________________
+
+
+./optimal_polygon –i instances/data/images/euro-night-0000500.instance –ο output.txt –algorithm simulated_annealing -L 1000 -min -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-min
+area_initial 1.65446e+07
+area: 1.65168e+07
+ratio_initial 0.199468
+ratio: 0.199133
+construction time: 725
+
+./optimal_polygon –i instances/data/images/euro-night-0000500.instance –ο output.txt –algorithm simulated_annealing -L 5000 -min -threshold 10.4 -annealing local  -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-min
+area_initial 1.65446e+07
+area: 1.51686e+07
+ratio_initial 0.199468
+ratio: 0.182879
+construction time: 3784
+
+./optimal_polygon –i instances/data/images/euro-night-0000500.instance –ο output.txt –algorithm simulated_annealing -L 8000 -min -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-min
+area_initial 1.65446e+07
+area: 1.44179e+07
+ratio_initial 0.199468
+ratio: 0.173827
+construction time: 5500
+
+
+./optimal_polygon –i instances/data/images/euro-night-0000500.instance –ο output.txt –algorithm simulated_annealing -L 1000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.11125e+07
+area: 6.11453e+07
+ratio_initial 0.736795
+ratio: 0.73719
+construction time: 806
+
+
+./optimal_polygon –i instances/data/images/euro-night-0000500.instance –ο output.txt –algorithm simulated_annealing -L 8000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.11125e+07
+area: 6.21695e+07
+ratio_initial 0.736795
+ratio: 0.749538
+construction time: 6307
+
+
+./optimal_polygon –i instances/data/images/euro-night-0000500.instance –ο output.txt –algorithm simulated_annealing -L 8000 -max -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.11125e+07
+area: 6.27814e+07
+ratio_initial 0.736795
+ratio: 0.756915
+construction time: 166649
+
+___________________________________________________________________________________________
+
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 1000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.78493e+07
+ratio_initial 0.771091
+ratio: 0.786759
+construction time: 1533
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 1000 -max -threshold 10.4 -annealing global  -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.66163e+07
+ratio_initial 0.771091
+ratio: 0.772462
+construction time: 67734
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 5000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.91385e+07
+ratio_initial 0.771091
+ratio: 0.801709
+construction time: 8220
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 5000 -max -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.6534e+07
+ratio_initial 0.771091
+ratio: 0.771507
+construction time: 401853
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 8000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.93218e+07
+ratio_initial 0.771091
+ratio: 0.803834
+construction time: 12366
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 8000 -max -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.64769e+07
+ratio_initial 0.771091
+ratio: 0.770845
+construction time: 675536
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 10000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.99995e+07
+ratio_initial 0.771091
+ratio: 0.811692
+construction time: 15904
+
+./optimal_polygon –i instances/data/images/euro-night-0001000.instance –ο output.txt –algorithm simulated_annealing -L 10000 -max -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 6.64981e+07
+area: 6.7756e+07
+ratio_initial 0.771091
+ratio: 0.785678
+construction time: 892865
+
+__________________________________________________________________________________________________________
+
+
+./optimal_polygon –i instances/data/uniform/uniform-0000500-1.instance  –ο output.txt –algorithm simulated_annealing -L 5000 -max -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 5.95369e+08
+area: 6.24575e+08
+ratio_initial 0.685542
+ratio: 0.719171
+construction time: 3350
+
+./optimal_polygon –i instances/data/uniform/uniform-0000500-1.instance  –ο output.txt –algorithm simulated_annealing -L 5000 -max -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-max
+area_initial 5.95369e+08
+area: 6.02657e+08
+ratio_initial 0.685542
+ratio: 0.693933
+construction time: 100549
+
+./optimal_polygon –i instances/data/uniform/uniform-0000500-1.instance  –ο output.txt –algorithm simulated_annealing -L 5000 -min -threshold 10.4 -annealing global -initialization_algorithm incremental
+
+(check Note)
+
+Algorithm: simulated_annealing_-min
+area_initial 2.56011e+08
+area: 2.66751e+08
+ratio_initial 0.294785
+ratio: 0.307152
+construction time: 92338
+
+./optimal_polygon –i instances/data/uniform/uniform-0000500-1.instance  –ο output.txt –algorithm simulated_annealing -L 5000 -min -threshold 10.4 -annealing local -initialization_algorithm incremental
+
+Algorithm: simulated_annealing_-min
+area_initial 2.56011e+08
+area: 2.24919e+08
+ratio_initial 0.294785
+ratio: 0.258985
+construction time: 3794
+
+-------------------------------------------------------------------------------------------------
+
+TIME:
+-----
+When it comes to construction times we can clearly see that on simulated annealing
+algorithm, global transition step is significantly more time consuming, on maximization 
+and minimization as well. Running multiple examples, changing only the algorithm parameter and keeping 
+the other parameters the same, the difference between local and global times is obvious.
+
+This is probably due to the validation process, that is more time consuming using a global step, as it has to check all the edges
+of the polygon to see whether or not it retains its simplicity. On the other hand, the local step, only checks the edges inside a small box
+where the changes were made (using a kd tree).
+
+------------------------------------------------------------------
+
+NUMBER OF ITERATIONS:
+-----
+We can notice that as we increase the L parameter(iterations), 
+the results from the algorithms on simulated annealing are
+slightly better. The results, were more optimized on local than
+on global step.
+------------------------------------------------------------------
+RATIO:
+------
+On simulated annealing, for the maximimization we can see that the ratio is 0.8. Usually
+we can notice an increase of 0.1, on local step, while on global step the increase is usually
+around 0.01. That means, we usually have larger increase of the area, with the local step.
+On minimization, the ratio is around 0.2 on both methods, and did not have significant decrease, 
+when testing with different number of iterations.
+
+------------------------------------------------------------------
+Note: 
+
+On some of the executions of the program, if the greedy algorithm has provided a "good" result,
+we noticed that the results from the simulated annealing, are slightly worse. This is probably
+because the Metropolis criterion, allows some "bad" transitions, which depend on the results that
+rand() provides.
+
+------------------------------------------------------------------
+
+LOCAL SEARCH VS SIMULATED ANNEALING:
+
+TIME:
+-----
+
+RATIO:
+-----
+
+
+
+--------------------------------------------------------------------
+
+CONCLUSION:
+-----------
+Comparing local and global steps, the results were more optimized
+in terms of ratio, as well as construction time, as global step is
+significantly slower.
+
+
+
+
+
+
+
+
+
