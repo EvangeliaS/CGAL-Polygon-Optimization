@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.1...3.15)
 
-project( optimal_polygon )
+project( annealing )
 
 
 # CGAL and its components
@@ -33,13 +33,13 @@ endif()
 # include for local package
 
 
-# Creating entries for target: optimal_polygon
+# Creating entries for target: annealing
 # ############################
 
-add_executable( optimal_polygon  convexHullAlgorithm.cpp incrementalAlgorithm.cpp main.cpp sharedLib.cpp )
+add_executable( annealing  convexHullAlgorithm.cpp incrementalAlgorithm.cpp sharedLib.cpp simAnnealing.cpp )
 
-add_to_cached_list( CGAL_EXECUTABLE_TARGETS optimal_polygon )
+add_to_cached_list( CGAL_EXECUTABLE_TARGETS annealing )
 
 # Link the executable to CGAL and third-party libraries
-target_link_libraries(optimal_polygon PRIVATE CGAL::CGAL )
+target_link_libraries(annealing PRIVATE CGAL::CGAL )
 

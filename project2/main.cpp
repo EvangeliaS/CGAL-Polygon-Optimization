@@ -102,10 +102,23 @@ int main(int argc, char **argv)
         }
     }
 
+    bool isMaximization; 
+    // if(argv[10] == "-max")
+    //     isMaximization = true;
+    // else if(argv[10] == "-min")
+    //     isMaximization = false;
+    // else
+    // {
+    //     std::cout << "Invalid argument for maximization or minimization. Please choose -max or -min." << std::endl;
+    //     return ERROR;
+    // }
+    isMaximization = false;
+
+
     // Length k ≤ 10 and threshold are user-defined parameters.
     int k = 10;
-    int threshold = 10;
-    int deltaArea = 100;
+    int threshold = -10;
+    int deltaArea = -100;
 
     // Initialize: Obtain (greedy) solution S; T ← ∅
     Polygon_2 A, saveA;
@@ -113,6 +126,10 @@ int main(int argc, char **argv)
 
     // Create the polygon A according to the algorithm chosen by the user
     A = convexHullAlgorithm(polygon, edgeSelection, constructionTime);
+    std::cout << "------------------A--------------------" << std::endl;
+    printPolygon(A);
+    std::cout << "--------------------------------------" << std::endl;
+
     saveA = A;
 
     if (!A.is_simple())
@@ -141,13 +158,27 @@ int main(int argc, char **argv)
     // findPaths(B, paths, k, edge);
     // printPaths(paths);
 
-
     // while ∆A ≥ threshold do
-    while (deltaArea >= threshold)
+    while (1)
     {
-        // int i = 0;
-        // i++;
-        // std::cout << "Iteration " << i << std::endl;
+        if(isMaximization)
+        {
+            if(deltaArea < threshold)
+            {
+
+                std::cout << "Best maximization solution found" << std::endl;
+                break;
+            }
+        }
+        else
+        {
+            if(deltaArea > threshold)
+            {
+                std::cout << "Best minimization solution found" << std::endl;
+                break;
+            }
+        }
+        
         int area = std::abs(A.area());
 
         std::vector<PathEdge> T;
@@ -159,62 +190,15 @@ int main(int argc, char **argv)
             findPaths(A, paths, k, *e);
             for (auto path : paths)
             {
+                // B is our testing polygon
                 Polygon_2 B = A;
                 // if V moving to e increases area and retains simplicity then
 
-                Polygon_2 addedPolygon;;
-
-                int indexPreviousVertex = findPolygonPoint(B, path[0]);
-                if (indexPreviousVertex == 0)
-                    indexPreviousVertex = B.size() - 1;
-                else
-                    indexPreviousVertex--;
-
-                int indexNextVertex = findPolygonPoint(B, path[path.size() - 1]);
-
-                if (indexNextVertex == B.size() - 1)
-                    indexNextVertex = 0;
-                else
-                    indexNextVertex++;
-
-                // is indexPreviousVertex a point of the path
-                bool isInPath = false;
-                for (auto point : path)
-                {
-                    if (point == B[indexPreviousVertex])
-                    {
-                        isInPath = true;
-                        std::cout << "Previous vertex is in path" << std::endl;
-                        break;
-                    }
-
-                    if(point == B[indexNextVertex])
-                    {
-                        isInPath = true;
-                        std::cout << "Next vertex is in path" << std::endl;
-                        break;
-                    }
-                }
-
-
-
-                // Add previous vertex, path and next vertex to the new polygon
-                addedPolygon.push_back(B[indexPreviousVertex]);
-                for (auto point : path)
-                    addedPolygon.push_back(point);
-                addedPolygon.push_back(B[indexNextVertex]);
-
-                // Calculate the addedPolygon area
-                int addedArea = std::abs(addedPolygon.area());
-
-
-
+               
                 // Remove path from B
                 for (auto p = path.vertices_begin(); p != path.vertices_end(); p++)
                     B.erase(std::find(B.begin(), B.end(), *p));
 
-
-            
                 // Add path between e.begin() and e.end()
                 int indexSource = findPolygonPoint(B, e->source());
                 int indexTarget = findPolygonPoint(B, e->target());
@@ -228,8 +212,53 @@ int main(int argc, char **argv)
                     for (auto p = path.vertices_begin(); p != path.vertices_end(); p++)
                         B.insert(B.vertices_begin() + indexSource, *p);
                 }
+
+                // If it retains simplicity then we add it to T
                 if (B.is_simple())
                 {
+                    Polygon_2 addedPolygon;
+
+                    int indexPreviousVertex = findPolygonPoint(A, path[0]);
+                    if (indexPreviousVertex == 0)
+                        indexPreviousVertex = A.size() - 1;
+                    else
+                        indexPreviousVertex--;
+
+                    int indexNextVertex = findPolygonPoint(A, path[path.size() - 1]);
+
+                    if (indexNextVertex == A.size() - 1)
+                        indexNextVertex = 0;
+                    else
+                        indexNextVertex++;
+
+                    // is indexPreviousVertex a point of the path
+                    bool isInPath = false;
+                    for (auto point : path)
+                    {
+                        if (point == A[indexPreviousVertex])
+                        {
+                            isInPath = true;
+                            std::cout << "Previous vertex is in path" << std::endl;
+                            break;
+                        }
+
+                        if(point == A[indexNextVertex])
+                        {
+                            isInPath = true;
+                            std::cout << "Next vertex is in path" << std::endl;
+                            break;
+                        }
+                    }
+
+                    // Add previous vertex, path and next vertex to the addedPolygon
+                    addedPolygon.push_back(A[indexPreviousVertex]);
+                    for (auto point : path)
+                        addedPolygon.push_back(point);
+                    addedPolygon.push_back(A[indexNextVertex]);
+
+                    // Calculate the addedPolygon area
+                    int addedArea = std::abs(addedPolygon.area());
+
                     Polygon_2 removedPolygon;
                     // Add e.source(), the path and e.target() to removedArea
                     removedPolygon.push_back(e->source());
@@ -237,43 +266,42 @@ int main(int argc, char **argv)
                         removedPolygon.push_back(*p);
 
                     removedPolygon.push_back(e->target());
+                    // Check if the removedPolygon is simple
+                    if(!addedPolygon.is_simple())
+                        std::cout << "Removed polygon is not simple" << std::endl;
 
                     // Calculate the removedPolygon area
                     int removedPolygonArea = std::abs(removedPolygon.area());
-                    // std::cout << "Removed polygon area: " << removedPolygonArea << std::endl;
 
                     // Calculate the difference between the added and removed polygons
                     int delta = addedArea - removedPolygonArea;
-                    // std::cout << "Delta: " << delta << std::endl;
+                    // B area
+                    int Barea = std::abs(B.area());
 
 
-                    T.push_back(PathEdge{path, *e, delta});
+                    T.push_back(PathEdge{path, *e, Barea - area});
                 } // end if
             }     // end for
-            // std::cout << "Here 5" << std::endl;
         } // end for
 
 
         // Sort T by delta in descending order
         std::sort(T.begin(), T.end(), [](PathEdge p1, PathEdge p2)
                   { return p1.deltaArea > p2.deltaArea; });
-        // print vector T
-        std::cout << "Vector T" << std::endl;
 
-        for (auto pathEdge : T)
-        {
-            std::cout << "Path: ";
-            for (auto p = pathEdge.path.vertices_begin(); p != pathEdge.path.vertices_end(); p++)
-                std::cout << "(" << p->x() << ", " << p->y() << ") ";
-            std::cout << std::endl;
-            std::cout << "Edge: (" << pathEdge.edge.source().x() << ", " << pathEdge.edge.source().y() << ") - (" << pathEdge.edge.target().x() << ", " << pathEdge.edge.target().y() << ")" << std::endl;
-            std::cout << "Delta: " << pathEdge.deltaArea << std::endl;
-        }
 
         // Apply all changes in T to S
         if (!T.empty())
         {
+            // Choose the path with the highest delta
             PathEdge chosenPEdge = T[0];
+            
+            // Choose the path with the lowest delta if we are minimizing
+            if(!isMaximization)
+            {
+                chosenPEdge = T[T.size() - 1];
+            }
+            
             // Remove path from A
             for (auto p = chosenPEdge.path.vertices_begin(); p != chosenPEdge.path.vertices_end(); p++)
                 A.erase(std::find(A.begin(), A.end(), *p));
@@ -292,30 +320,19 @@ int main(int argc, char **argv)
                 for (auto p = chosenPEdge.path.vertices_begin(); p != chosenPEdge.path.vertices_end(); p++)
                     A.insert(A.vertices_begin() + indexSource, *p);
             }
-                        // is deltaArea == chosenPEdge.deltaArea
-            deltaArea = std::abs(A.area()) - area;
-            if (deltaArea != chosenPEdge.deltaArea)
-                std::cout << "ERROR AREA" << std::endl;
-            else
-                std::cout << "CORRECT AREA" << std::endl;
-        }
-        else
-        {
-            std::cout << "No path found" << std::endl;
-            break;
-        }
-        // deltaArea = std::abs(A.area()) - area;
 
-        // Keep best solution S′; ∆A ← Area(S′) − Area(S)
+            // Keep best solution S′; ∆A ← Area(S′) − Area(S)
+            // Update area - Area already calculated when we added the path to T
+            deltaArea = chosenPEdge.deltaArea;
+        }
+        // If no path is found then we stop
+        else
+            break;
     }// end while
 
-    std::cout << "---------------- A (before) ---------------- " << std::endl;
-    printPolygon(saveA);
-    std::cout << "-------------------------------------------- " << std::endl;
-    std::cout << "---------------- A (after) ---------------- " << std::endl;
-    printPolygon(A);
-    std::cout << "-------------------------------------------- " << std::endl;
+   
     // is A simple?
+    std::cout << "AFTER:" << std::abs(A.area()) << ",  BEFORE:" << std::abs(saveA.area()) << std::endl;
     if (!A.is_simple())
         std::cout << "Polygon A is not simple" << std::endl;
     else
