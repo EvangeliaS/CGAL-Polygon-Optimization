@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/stathis/git/project_dit_emiris/project3/sharedLib.cpp
+sharedLib.h
+/home/stathis/git/project_dit_emiris/project3/sharedLib.h
+
+/home/stathis/git/project_dit_emiris/project3/sharedLib.h
+CGAL/Exact_predicates_inexact_constructions_kernel.h
+-
+CGAL/convex_hull_2.h
+-
+CGAL/intersections.h
+-
+CGAL/Polygon_2.h
+-
+fstream
+-
+
