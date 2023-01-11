@@ -60,9 +60,10 @@ bool local_search(Polygon_2 &A, int k, double threshold, int deltaArea, bool isM
     clock_t end;
 
 
-// while ∆A ≥ threshold do
-while (1)
+    // while ∆A ≥ threshold do
+    while (1)
     {
+        bool acceptableSolutionFound = false;
         if(isMaximization)
         {
             if(deltaArea < threshold)
@@ -77,6 +78,7 @@ while (1)
         int area = std::abs(A.area());
 
         std::vector<PathEdge> T;
+        bool flag = false;
         // for every edge e ∈ S do
         for (auto e = A.edges_begin(); e != A.edges_end(); e++)
         {
@@ -111,66 +113,91 @@ while (1)
                 // If it retains simplicity then we add it to T
                 if (B.is_simple())
                 {
-                    Polygon_2 addedPolygon;
+                    // Polygon_2 addedPolygon;
 
-                    int indexPreviousVertex = findPolygonPoint(A, path[0]);
-                    if (indexPreviousVertex == 0)
-                        indexPreviousVertex = A.size() - 1;
-                    else
-                        indexPreviousVertex--;
+                    // int indexPreviousVertex = findPolygonPoint(A, path[0]);
+                    // if (indexPreviousVertex == 0)
+                    //     indexPreviousVertex = A.size() - 1;
+                    // else
+                    //     indexPreviousVertex--;
 
-                    int indexNextVertex = findPolygonPoint(A, path[path.size() - 1]);
+                    // int indexNextVertex = findPolygonPoint(A, path[path.size() - 1]);
 
-                    if (indexNextVertex == A.size() - 1)
-                        indexNextVertex = 0;
-                    else
-                        indexNextVertex++;
+                    // if (indexNextVertex == A.size() - 1)
+                    //     indexNextVertex = 0;
+                    // else
+                    //     indexNextVertex++;
 
-                    // is indexPreviousVertex a point of the path
-                    bool isInPath = false;
-                    for (auto point : path)
+                    // // is indexPreviousVertex a point of the path
+                    // bool isInPath = false;
+                    // for (auto point : path)
+                    // {
+                    //     if (point == A[indexPreviousVertex])
+                    //     {
+                    //         isInPath = true;
+                    //         std::cout << "Previous vertex is in path" << std::endl;
+                    //         break;
+                    //     }
+
+                    //     if(point == A[indexNextVertex])
+                    //     {
+                    //         isInPath = true;
+                    //         std::cout << "Next vertex is in path" << std::endl;
+                    //         break;
+                    //     }
+                    // }
+
+                    // // Add previous vertex, path and next vertex to the addedPolygon
+                    // addedPolygon.push_back(A[indexPreviousVertex]);
+                    // for (auto point : path)
+                    //     addedPolygon.push_back(point);
+                    // addedPolygon.push_back(A[indexNextVertex]);
+                    int Barea = std::abs(B.area());
+                    if(isMaximization)
                     {
-                        if (point == A[indexPreviousVertex])
+                        if (Barea - area > threshold)
                         {
-                            isInPath = true;
-                            std::cout << "Previous vertex is in path" << std::endl;
-                            break;
-                        }
-
-                        if(point == A[indexNextVertex])
-                        {
-                            isInPath = true;
-                            std::cout << "Next vertex is in path" << std::endl;
-                            break;
+                            acceptableSolutionFound = true;
+                            T.push_back(PathEdge{path, *e, Barea - area});
+                            // std::cout << "Acceptable solution found" << std::endl;
                         }
                     }
+                    else
+                    {
+                        if (Barea - area < threshold)
+                        {
+                            acceptableSolutionFound = true;
+                            T.push_back(PathEdge{path, *e, Barea - area});
 
-                    // Add previous vertex, path and next vertex to the addedPolygon
-                    addedPolygon.push_back(A[indexPreviousVertex]);
-                    for (auto point : path)
-                        addedPolygon.push_back(point);
-                    addedPolygon.push_back(A[indexNextVertex]);
-                    int Barea = std::abs(B.area());
+                            // std::cout << "Acceptable solution found" << std::endl;
+                        }
+                    }
+                    // // Calculate the addedPolygon area
+                    // int addedArea = std::abs(addedPolygon.area());
 
-                    // Calculate the addedPolygon area
-                    int addedArea = std::abs(addedPolygon.area());
+                    // Polygon_2 removedPolygon;
+                    // // Add e.source(), the path and e.target() to removedArea
+                    // removedPolygon.push_back(e->source());
+                    // for (auto p = path.vertices_begin(); p != path.vertices_end(); p++)
+                    //     removedPolygon.push_back(*p);
+                    // removedPolygon.push_back(e->target());
 
-                    Polygon_2 removedPolygon;
-                    // Add e.source(), the path and e.target() to removedArea
-                    removedPolygon.push_back(e->source());
-                    for (auto p = path.vertices_begin(); p != path.vertices_end(); p++)
-                        removedPolygon.push_back(*p);
-                    removedPolygon.push_back(e->target());
+                    // // Calculate the removedPolygon area
+                    // int removedPolygonArea = std::abs(removedPolygon.area());
 
-                    // Calculate the removedPolygon area
-                    int removedPolygonArea = std::abs(removedPolygon.area());
-
-                    // Calculate the difference between the added and removed polygons
-                    int delta = addedArea - removedPolygonArea;
+                    // // Calculate the difference between the added and removed polygons
+                    // int delta = addedArea - removedPolygonArea;
 
 
                     T.push_back(PathEdge{path, *e, Barea - area});
+                    if(acceptableSolutionFound && T.size() > 300)
+                    {
+                        flag = true;
+                        break;
+                    }
                 } // end if
+                if (flag)
+                    break;
             }     // end for
         } // end for
 
@@ -218,6 +245,8 @@ while (1)
         // If no path is found then we stop
         else
             break;
+        // std::cout << "deltaArea: " << deltaArea << ", Number of paths: " << T.size() << std::endl;
+
     }// end while
 
 

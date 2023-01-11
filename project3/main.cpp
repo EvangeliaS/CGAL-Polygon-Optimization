@@ -161,7 +161,7 @@ int main(int argc, char **argv)
         std::cout << "Polygon affter optimization is  simple" << std::endl;
 
     // Write the necessary information to the output file
-    writeToOutput(A, initial_area, initial_ratio, polygonization, constructionTime, outputFile, algorithm, true);
+    writeToOutput(A, initial_area, initial_ratio, polygonization, constructionTime, outputFile, algorithm, false);
     std::cout << "Done!\nOutput written to " << outputFile << std::endl;
 
     return 0;

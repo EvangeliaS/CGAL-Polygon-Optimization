@@ -6,9 +6,33 @@
 
 #IncludeRegexTransform: 
 
-/home/stathis/git/project_dit_emiris/project3/sharedLib.cpp
+/home/stathis/git/project_dit_emiris/project3/convexHullAlgorithm.h
+chrono
+-
+float.h
+-
+algorithm
+-
+random
+-
 sharedLib.h
 /home/stathis/git/project_dit_emiris/project3/sharedLib.h
+
+/home/stathis/git/project_dit_emiris/project3/incrementalAlgorithm.h
+sharedLib.h
+/home/stathis/git/project_dit_emiris/project3/sharedLib.h
+
+/home/stathis/git/project_dit_emiris/project3/local_search.cpp
+local_search.h
+/home/stathis/git/project_dit_emiris/project3/local_search.h
+
+/home/stathis/git/project_dit_emiris/project3/local_search.h
+sharedLib.h
+/home/stathis/git/project_dit_emiris/project3/sharedLib.h
+incrementalAlgorithm.h
+/home/stathis/git/project_dit_emiris/project3/incrementalAlgorithm.h
+convexHullAlgorithm.h
+/home/stathis/git/project_dit_emiris/project3/convexHullAlgorithm.h
 
 /home/stathis/git/project_dit_emiris/project3/sharedLib.h
 CGAL/Exact_predicates_inexact_constructions_kernel.h
