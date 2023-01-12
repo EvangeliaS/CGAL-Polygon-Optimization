@@ -36,7 +36,7 @@ std::vector<std::string> split(const std::string &s, char delimiter)
     return tokens;
 }
 
-void writeToOutput(Polygon_2 A, double initial_area, double initial_ratio, std::string polygonization, int constructionTime, std::string outputFile, std::string algorithm, bool overwrite)
+void writeToOutput( std::string outputFile, std::vector<Score>& scores, int size, bool overwrite)
 {
     if(overwrite)
     {
@@ -69,48 +69,10 @@ void writeToOutput(Polygon_2 A, double initial_area, double initial_ratio, std::
             perror("Error on opening output file");
             exit(ERROR);
         }
-        // Write to output file
-        output << "Optimal Area Polygonization" << std::endl;
-
-        // Write the vertices of the polygon
-        for (auto it = A.vertices_begin(); it != A.vertices_end(); it++)
-        {
-            output << *it << std::endl;
-        }
-
-        // Write the edges of the polygon
-        for (auto it = A.edges_begin(); it != A.edges_end(); it++)
-        {
-            output << *it << std::endl;
-        }
-
-        //Compute the area of the convexHull of the point set given
-        Polygon_2 convexHull;
-        CGAL::convex_hull_2(A.begin(), A.end(), std::back_inserter(convexHull));
-
-        double final_area = std::abs(A.area());
-        double final_ratio = std::abs(A.area()) / std::abs(convexHull.area());
-
-        // Write the algorithm used
-        output << "Algorithm: " << algorithm << "_" << polygonization << std::endl;
-        if (algorithm == "local_search" || algorithm == "simulated_annealing" )
-            output << "area_initial " << initial_area << std::endl;
-        else
-            output << std::endl;
-        // Write the area of the polygon
-        output << "area: " << final_area << std::endl;
-
-        if (algorithm == "local_search" || algorithm == "simulated_annealing" )
-            // Write the initial ratio of the polygon
-            output << "ratio_initial " << initial_ratio << std::endl;
-        else
-            output << std::endl;
-        // Write the ratio of the polygon
-        output << "ratio: " << final_ratio << std::endl;
-
-        // Write the construction time of the polygon
-        output << "construction time: " << constructionTime << std::endl;
-
+        
+        output << std::fixed;
+        output << std::setprecision(5);
+        output << size << "\t ||  " << scores[0].scoreMin << "  |  " << scores[0].scoreMax << "  |  " << scores[0].boundMin << "  |  " << scores[0].boundMax << "  ||  " << scores[1].scoreMin << "  |  " << scores[1].scoreMax << "  |  " << scores[1].boundMin << "  |  " << scores[1].boundMax << "  ||  " << scores[2].scoreMin << "  |  " << scores[2].scoreMax << "  |  " << scores[2].boundMin << "  |  " << scores[2].boundMax << "   ||  " << scores[3].scoreMin << "  |  " << scores[3].scoreMax << "  |  " << scores[3].boundMin << "  |  " << scores[3].boundMax << "   ||  " << scores[4].scoreMin << "  |  " << scores[4].scoreMax << "  |  " << scores[4].boundMin << "  |  " << scores[4].boundMax << "   ||  " << scores[5].scoreMin << "  |  " << scores[5].scoreMax << "  |  " << scores[5].boundMin << "  |  " << scores[5].boundMax << std::endl;
         // Close the output file
         output.close();
     }
@@ -120,6 +82,62 @@ int cutOffmsecs(int numPoints)
 {
     // f(n) = 500*n msec
     return  500 * numPoints;
+}
+
+std::vector<Score> calculateScores(std::vector<std::vector<double>> scoresOfSize)
+{
+    std::vector<Score> scores;
+    // Push back 6 scores
+    for(int i = 0; i < scoresOfSize[0].size()/2; i++)
+    {
+        scores.push_back(Score());
+    }
+
+    // Create a vector sum of doubles with inital value 0
+    double sum[scoresOfSize[0].size()];
+    double boundMin[scoresOfSize[0].size()];
+    double boundMax[scoresOfSize[0].size()];
+    for(int i = 0; i < scoresOfSize[0].size(); i++)
+    {
+        sum[i] = 0.0;
+        boundMin[i] = 0.0;
+        boundMax[i] = 1.0;
+    }
+
+    for(int i = 0; i < scoresOfSize.size(); i++)
+    {
+        // For Max Results
+        for(int j = 0; j < scoresOfSize[i].size(); j+=2)
+        {
+            sum[j] += scoresOfSize[i][j];
+            if(scoresOfSize[i][j] < boundMax[j])
+            {
+                boundMax[j] = scoresOfSize[i][j];
+            }
+        }
+
+        // For Min Results
+        for(int j = 1; j < scoresOfSize[i].size(); j+=2)
+        {
+            sum[j] += scoresOfSize[i][j];
+            if(scoresOfSize[i][j] > boundMin[j])
+            {
+                boundMin[j] = scoresOfSize[i][j];
+            }
+        }
+    }
+
+    for(int i = 0; i < scores.size(); i++)
+    {
+        scores[i].scoreMax = sum[i*2];
+        scores[i].scoreMin = sum[i*2+1];
+
+        scores[i].boundMax = boundMax[i*2];
+        scores[i].boundMin = boundMin[i*2+1];
+        scores[i].print();
+    }
+
+    return scores;
 }
 
 #endif // __SHARED_LIB_CPP__

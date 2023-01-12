@@ -38,6 +38,10 @@ simulated_annealing.h
 local_search.h
 /home/stathis/git/project_dit_emiris/project3/local_search.h
 
+/home/stathis/git/project_dit_emiris/project3/sharedLib.cpp
+sharedLib.h
+/home/stathis/git/project_dit_emiris/project3/sharedLib.h
+
 /home/stathis/git/project_dit_emiris/project3/sharedLib.h
 CGAL/Exact_predicates_inexact_constructions_kernel.h
 -
