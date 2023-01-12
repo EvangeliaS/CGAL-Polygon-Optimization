@@ -116,4 +116,10 @@ void writeToOutput(Polygon_2 A, double initial_area, double initial_ratio, std::
     }
 }
 
+int cutOffmsecs(int numPoints)
+{
+    // f(n) = 500*n msec
+    return  500 * numPoints;
+}
+
 #endif // __SHARED_LIB_CPP__

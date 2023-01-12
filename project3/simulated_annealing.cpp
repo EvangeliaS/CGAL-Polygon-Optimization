@@ -192,24 +192,6 @@ bool validityCheckLocal(Polygon_2 &A, Point_2 &p, Point_2 &q, Point_2 &r, Point_
         }
     }
 
-
-    if(A.is_simple())
-    {
-        // return true;
-    }
-    else
-    {
-        std::cout << "A is not simple" << std::endl;
-        std::cout << "---------A---------" << std::endl;
-        printPolygon(A);
-        std::cout << "-------------------" << std::endl;
-        //print p, q, r, s
-        std::cout << "p: " << p << std::endl;
-        std::cout << "q: " << q << std::endl;
-        std::cout << "r: " << r << std::endl;
-        std::cout << "s: " << s << std::endl;
-
-    }
     return true;
 }
 
@@ -288,11 +270,12 @@ bool validityCheckGlobal(Polygon_2 &A, Point_2& p, Point_2& q, Point_2& r, Point
     return true;
 }
 
-int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_Maximization, int &constructionTime)
+int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_Maximization, int &constructionTime, int remainingTime)
 {
     // Start the clock
     clock_t start = clock();
     clock_t end;
+    clock_t elapsed;
 
     double T = 1.0;
     Polygon_2 save_polygon = polygon;
@@ -334,11 +317,11 @@ int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_
             polygon = save_polygon;
         }
         T -= 1 / (double)L;
-        // is polygon simple
-        if (!polygon.is_simple())
-        {
-            std::cout << " Polygon is not simple " << std::endl;
-        }
+
+
+        elapsed = (clock() - start) / (double)(CLOCKS_PER_SEC / 1000);
+        if(elapsed > remainingTime)
+            return ERROR;
     }
 
     // Stop the clock

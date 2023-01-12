@@ -22,10 +22,6 @@ sharedLib.h
 sharedLib.h
 /home/stathis/git/project_dit_emiris/project3/sharedLib.h
 
-/home/stathis/git/project_dit_emiris/project3/local_search.cpp
-local_search.h
-/home/stathis/git/project_dit_emiris/project3/local_search.h
-
 /home/stathis/git/project_dit_emiris/project3/local_search.h
 sharedLib.h
 /home/stathis/git/project_dit_emiris/project3/sharedLib.h
@@ -33,6 +29,14 @@ incrementalAlgorithm.h
 /home/stathis/git/project_dit_emiris/project3/incrementalAlgorithm.h
 convexHullAlgorithm.h
 /home/stathis/git/project_dit_emiris/project3/convexHullAlgorithm.h
+
+/home/stathis/git/project_dit_emiris/project3/main.cpp
+dirent.h
+-
+simulated_annealing.h
+/home/stathis/git/project_dit_emiris/project3/simulated_annealing.h
+local_search.h
+/home/stathis/git/project_dit_emiris/project3/local_search.h
 
 /home/stathis/git/project_dit_emiris/project3/sharedLib.h
 CGAL/Exact_predicates_inexact_constructions_kernel.h
@@ -45,4 +49,36 @@ CGAL/Polygon_2.h
 -
 fstream
 -
+
+/home/stathis/git/project_dit_emiris/project3/simulated_annealing.h
+CGAL/Exact_predicates_inexact_constructions_kernel.h
+-
+CGAL/Search_traits_2.h
+-
+CGAL/Iso_rectangle_2.h
+-
+CGAL/Fuzzy_iso_box.h
+-
+CGAL/convex_hull_2.h
+-
+CGAL/intersections.h
+-
+CGAL/Polygon_2.h
+-
+iostream
+-
+fstream
+-
+string
+-
+time.h
+-
+CGAL/Kd_tree.h
+-
+sharedLib.h
+/home/stathis/git/project_dit_emiris/project3/sharedLib.h
+incrementalAlgorithm.h
+/home/stathis/git/project_dit_emiris/project3/incrementalAlgorithm.h
+convexHullAlgorithm.h
+/home/stathis/git/project_dit_emiris/project3/convexHullAlgorithm.h
 

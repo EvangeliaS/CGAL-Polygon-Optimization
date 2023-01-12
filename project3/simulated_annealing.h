@@ -31,7 +31,7 @@ double compute_deltaEnergy(double finalEnergy, double initialEnergy);
 
 bool Metropolis_criterion(double deltaEnergy, double T);
 
-int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_Maximization, int &constructionTime);
+int minimization_algorithm(Polygon_2 &polygon, bool isLocalStep, int L, bool is_Maximization, int &constructionTime, int remainingTime);
 
 void spatialSubdivision(Polygon_2 &pointset, int& constructionTime);
 

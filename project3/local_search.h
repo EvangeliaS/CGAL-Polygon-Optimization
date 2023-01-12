@@ -15,4 +15,4 @@ public:
 void findPaths(Polygon_2 A, std::vector<Polygon_2> &paths, int k, Segment_2 edge);
 void printPaths(std::vector<Polygon_2> paths);
 bool isEdgePartOfPath(Polygon_2 path, Segment_2 edge);
-bool local_search(Polygon_2 &A, int k, double threshold, int deltaArea, bool isMaximization, int& constructionTime);
+bool local_search(Polygon_2 &A, int k, double threshold, int deltaArea, bool isMaximization, int& constructionTime, int remainingTime);

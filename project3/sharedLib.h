@@ -22,5 +22,6 @@ int findPolygonPoint(Polygon_2 polygon, Point_2 point);
 std::vector<std::string> split(const std::string &s, char delimiter);
 // Writes the output to the output file.
 void writeToOutput(Polygon_2 A, double initial_area, double initial_ratio, std::string polygonization, int constructionTime, std::string outputFile, std::string algorithm, bool overwrite);
+int cutOffmsecs(int numPoints);
 
 #endif // __SHARED_LIB_H__

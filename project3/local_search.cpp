@@ -54,9 +54,10 @@ void printPaths(std::vector<Polygon_2> paths)
 }
 
 
-bool local_search(Polygon_2 &A, int k, double threshold, int deltaArea, bool isMaximization, int& constructionTime){
+bool local_search(Polygon_2 &A, int k, double threshold, int deltaArea, bool isMaximization, int& constructionTime, int remainingTime){
     // Start the clock
     clock_t start = clock();
+    clock_t elapsed;
     clock_t end;
 
 
@@ -246,7 +247,9 @@ bool local_search(Polygon_2 &A, int k, double threshold, int deltaArea, bool isM
         else
             break;
         // std::cout << "deltaArea: " << deltaArea << ", Number of paths: " << T.size() << std::endl;
-
+        elapsed = (clock() - start) / (double)(CLOCKS_PER_SEC / 1000);
+        if(elapsed > remainingTime)
+            return false;
     }// end while
 
 
