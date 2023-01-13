@@ -134,7 +134,6 @@ std::vector<Score> calculateScores(std::vector<std::vector<double>> scoresOfSize
 
         scores[i].boundMax = boundMax[i*2];
         scores[i].boundMin = boundMin[i*2+1];
-        scores[i].print();
     }
 
     return scores;

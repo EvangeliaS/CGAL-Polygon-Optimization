@@ -2,16 +2,34 @@
 - Evangelia Steiropoulou, 1115201800186
 
 
-The program is given an input file and creates a  simple polygon out of them.
-After that it area optimizes it according to the algorithm choice that is
-provided by the user. The program is written in C++ and uses the CGAL library.
-Extensive comments have been used throught the source code, explaining
-in detail every step of the implementaion.
+The program is given an input directory, splits it into clusters of files with the same
+amount of points. For each cluster of same size files it runs 6 distinct algorithms for
+creating a polygon from the points, while maximizing the area of the polygon and the same
+6 algorithms for minimizing the area of the polygon. Then the scores of the algorithms are
+calculated for each cluster of same size files and they are written to an output file. If
+at any point, for any algorithm, the program fails to create a simple polygon or algorithm
+exceeds its time limit, the program attributes said algorithm a score of 0 for maximizing
+and 1 for minimizing the area of the polygon.
+
+
+INPUT FILE NAMES
+----------------
+
+The input files must end with -<7digits>.instance:
+   e.g. -0000000.instance
+
+The problem occurs with uniform input files so before adding them to the input directory
+remove the -1 or -2.
+
+    e.g. uniform-0000010-1.instance -> uniform-0000010.instance
+         uniform-0000010-2.instance -> uniform-0000010.instance
 
 FILES:
+------
 
 - readme.txt
 - report.txt
+    Includes an example of an output file.
 - main.cpp
     Simple main that reads the points from the input file, creates the
     polygon based on the parameters specified by the user. After it optimizes
@@ -47,6 +65,8 @@ FILES:
 - simulated_annealing.h:
 	Header file that contains the declarations of the functions, the
 	typedefs and defines used by the simulated annealing algorithm.
+- testDir:
+    Contains the input files used for the output file.
 
 
 COMPILE & RUN
@@ -55,48 +75,38 @@ COMPILE & RUN
 The program is built using CMake. The following commands must be used
 to build the program:
 
-	cgal_create_CMakeLists -s optimal_polygon && cmake -DCGAL_DIR=/usr/lib/CGAL -DCMAKE_BUILD_TYPE=Release && make
+	cgal_create_CMakeLists -s evaluate && cmake -DCGAL_DIR=/usr/lib/CGAL -DCMAKE_BUILD_TYPE=Release && make
 
 To run the program, the following command must be used:
 
-	./optimal_polygon –i instances/data/images/euro-night-0000100.instance –ο output.txt –algorithm simulated_annealing -L 1000 -max -threshold 10.45 -annealing local -initialization_algorithm convex_hull
+	./evaluate –i testDir/ –ο output.txt
 
 
- - We added another parameter at the end of the command, which is the greedy algorithm
-needed for the initialization(incremental/convex_hull)
+ALGORITHMS
+----------
 
-For minimization and maximization algorithms, we choose edge selection 2 and 3 for the greedy algorithms respectively. Having the minimim or maximum polygon area, created from the greedy algorithm, we had even better results with the optimization.
+1) Incremental & Local Search
 
+2) Incremental & Simulated Annealing (Local Step)
 
-Local Search
-------------
+3) Incremental & Simulated Annealing (Global Step)
 
-- The local search algorithm is implemented and works as intended. 
+4) Convex Hull & Local Search
 
-- The L parameter when running the program is the value k of the algorithm (max number
-  of vertices of the path).
+5) Convex Hull & Simulated Annealing (Local Step)
 
-- Examples of runs of the local search algorithm are given in the report.
-
-Simulated Annealing
--------------------
-
-- The simulated annealing algorithm is implemented and works as intended for the local
-  steep. A Kd-Tree is used to avoid unnecessary calculations.
-
-- For the global Step the validation is done by checking if the polygon is simple or not.
-  To check its validity using our custom made function:
-	1) Uncomment lines 84-89 in simulated_annealing.cpp
-	2) Comment lines 92-96 in simulated_annealing.cpp
+6) Convex Hull & Simulated Annealing (Global Step)
 
 
-Subdivision Algorithm (Not implemented)
----------------------------------------
+All algorithms are run twice for each file of the input directory. Once
+to maximize the area of the polygon and once to minimize the area of the
+polygon.
 
-For the subdivision algorithm we couldn't make sure that the critical edges after the
-greedy algorithm were intact and therefore we couldn't use the subdivision algorithm.
+HYPERPARAMETERS (PREPROCESSING)
+-------------------------------
 
-However, the algorithm's helper functions are implemented .For example,
-void splitIntoSubsets(Polygon_2& pointset, std::vector<Polygon_2>& subsets)
-works as intended and can be used to split the initial pointset into subsets keeping
-the monotonicity of the leftmost and rightmost points of each subset.
+The hyperparameters of each algorithm were chosen so as to simultaneously
+create a polygon with the best possible score, while also being able to run
+in a reasonable amount of time, namely in less than the cut-off point,
+500 * n milliseconds, where n is the number of points of the file used.
+More on that can be found in the report.

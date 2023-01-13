@@ -8,6 +8,14 @@
 
 int main(int argc, char **argv)
 {
+    if (argc != 5)
+    {
+        std::cout << "Wrong number of arguments. Correct input: $./evaluate -i <point set path> -o <output file>" << std::endl;
+
+        return ERROR;
+    }
+
+
     std::string inputDirectory = argv[2];
     std::string inputFile;
     std::string outputFile = argv[4];
@@ -74,18 +82,6 @@ int main(int argc, char **argv)
     }
     // Add the last vector of files
     filesBySize.push_back(temp);
-
-    // Print the files by size
-    for(auto files : filesBySize)
-    {
-        std::cout << "\t" << files[0].size << std::endl;
-        for(auto file : files)
-        {
-            file.print();
-        }
-        std::cout << std::endl;
-    }
-
 
     // Write the header of the output file
     std::vector<Score> sc;
@@ -340,19 +336,9 @@ int main(int argc, char **argv)
 
             scoresOfSize.push_back(scoresOfCurrFile);
 
-            for(auto score : scoresOfCurrFile)
-            {
-                std::cout << "Score: " << score << std::endl;
-            }
         }
         // Calculate metrics
         std::vector<Score> scores = calculateScores(scoresOfSize);
-        for (auto score : scores)
-        {
-            std::cout << "--------------------------" << std::endl;
-            score.print();
-            std::cout << "--------------------------" << std::endl;
-        }
         
         // Write results of the current size to the output file
         writeToOutput(outputFile, scores, files[0].size, false);
