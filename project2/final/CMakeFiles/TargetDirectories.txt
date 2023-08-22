@@ -1,3 +1,0 @@
-/home/stathis/git/project_dit_emiris/project2/final/CMakeFiles/rebuild_cache.dir
-/home/stathis/git/project_dit_emiris/project2/final/CMakeFiles/edit_cache.dir
-/home/stathis/git/project_dit_emiris/project2/final/CMakeFiles/to_polygon.dir

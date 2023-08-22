@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/annealing.dir/convexHullAlgorithm.cpp.o CMakeFiles/annealing.dir/incrementalAlgorithm.cpp.o CMakeFiles/annealing.dir/main.cpp.o CMakeFiles/annealing.dir/sharedLib.cpp.o CMakeFiles/annealing.dir/simulated_annealing.cpp.o  -o annealing  /usr/lib/x86_64-linux-gnu/libmpfr.so /usr/lib/x86_64-linux-gnu/libgmp.so 
