@@ -1,3 +1,0 @@
-/home/stathis/git/project_dit_emiris/testDir/CMakeFiles/rebuild_cache.dir
-/home/stathis/git/project_dit_emiris/testDir/CMakeFiles/edit_cache.dir
-/home/stathis/git/project_dit_emiris/testDir/CMakeFiles/program.dir

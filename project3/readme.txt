@@ -79,7 +79,7 @@ to build the program:
 
 To run the program, the following command must be used:
 
-	./evaluate –i testDir/ –ο output.txt
+	./evaluate –i testDir –ο output.txt
 
 
 ALGORITHMS

@@ -32,10 +32,10 @@ LOCAL SEARCH
 
     PARAMETERS:
     -----------
-    After multiple tests, we decided that the best parameters for the local search algorithm are deltaArea = |100|
-    and threshold = |10|. These were the values that gave us the best results, in time that didn't exceed the cut-off
-    point. Altering these values, resulted in way worse results, wheras the execution gains were not significant enough
-    to justify the worse results.
+    After multiple tests, we decided that the best parameter for the local search algorithm is threshold = |10|.
+    These were the values that gave us the best results, in time that didn't exceed the cut-off point. Altering
+    these values, resulted in way worse results, wheras the execution gains were not significant enough to justify
+    the worse results.
 
 
 -------------------

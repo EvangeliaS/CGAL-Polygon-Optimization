@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/program.dir/test.cpp.o  -o program  /usr/lib/x86_64-linux-gnu/libmpfr.so /usr/lib/x86_64-linux-gnu/libgmp.so 

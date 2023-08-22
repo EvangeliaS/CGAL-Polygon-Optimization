@@ -22,7 +22,7 @@ sharedLib.h
 sharedLib.h
 /home/stathis/git/project_dit_emiris/project2/eva/sharedLib.h
 
-/home/stathis/git/project_dit_emiris/project2/eva/main.cpp
+/home/stathis/git/project_dit_emiris/project2/eva/sharedLib.h
 CGAL/Exact_predicates_inexact_constructions_kernel.h
 -
 CGAL/convex_hull_2.h
@@ -31,34 +31,12 @@ CGAL/intersections.h
 -
 CGAL/Polygon_2.h
 -
-iostream
--
 fstream
 -
-string
--
-time.h
--
-sharedLib.h
-/home/stathis/git/project_dit_emiris/project2/eva/sharedLib.h
-incrementalAlgorithm.h
-/home/stathis/git/project_dit_emiris/project2/eva/incrementalAlgorithm.h
-convexHullAlgorithm.h
-/home/stathis/git/project_dit_emiris/project2/eva/convexHullAlgorithm.h
+
+/home/stathis/git/project_dit_emiris/project2/eva/simulated_annealing.cpp
 simulated_annealing.h
 /home/stathis/git/project_dit_emiris/project2/eva/simulated_annealing.h
-
-/home/stathis/git/project_dit_emiris/project2/eva/sharedLib.h
-CGAL/Exact_predicates_inexact_constructions_kernel.h
--
-CGAL/convex_hull_2.h
--
-CGAL/intersections.h
--
-CGAL/Polygon_2.h
--
-fstream
--
 
 /home/stathis/git/project_dit_emiris/project2/eva/simulated_annealing.h
 CGAL/Exact_predicates_inexact_constructions_kernel.h
