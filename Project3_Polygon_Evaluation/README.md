@@ -16,7 +16,7 @@ Input files must have names ending with -<7digits>.instance, for example, `-0000
 
 ## Files
 
-- [readme.txt](readme.txt): Description of the program.
+- README.md: Description of the program.
 - [report.txt](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/95715118d8b0ccf8cbd502c2c3cc14620c8dce38/Project3_Polygon_Evaluation/report.txt): Includes an example of an output file.
 - [main.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/95715118d8b0ccf8cbd502c2c3cc14620c8dce38/Project3_Polygon_Evaluation/main.cpp): Main program that reads points from the input file, creates polygons, optimizes them based on user-specified parameters, and generates the output file.
 - [sharedLib.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/95715118d8b0ccf8cbd502c2c3cc14620c8dce38/Project3_Polygon_Evaluation/sharedLib.h): Header file containing function declarations, typedefs, and defines shared between the Incremental and Convex Hull algorithms or used by the main program.
