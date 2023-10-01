@@ -97,4 +97,3 @@ Each algorithm is configured with specific hyperparameters to balance performanc
 ## Conclusion
 
 This program provides a comprehensive tool for optimizing polygons using multiple algorithms. Refer to the report for detailed insights and examples of program usage. Feel free to explore the source code and adapt it to your specific optimization needs.
-```
