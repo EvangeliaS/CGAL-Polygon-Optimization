@@ -1,4 +1,4 @@
-# Polygon Optimization Program
+# Polygon Optimization
 
 - Efstathios Chatziloizos
 - Evangelia Steiropoulou
