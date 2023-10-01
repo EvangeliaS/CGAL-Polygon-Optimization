@@ -10,18 +10,19 @@ This C++ program is designed for polygon optimization using the CGAL library. It
 ## Files
 
 - README.md: Description of the program.
-- [report.txt](report.txt): Detailed information about the program's algorithms and usage.
-- [main.cpp](main.cpp): Main program that processes input files, creates polygons, and performs optimization.
-- [sharedLib.h](sharedLib.h): Header file containing function declarations, typedefs, and defines shared across different algorithms.
-- [sharedLib.cpp](sharedLib.cpp): Source code for shared functions.
-- [incrementalAlgorithm.h](incrementalAlgorithm.h): Header file for the Incremental algorithm.
-- [incrementalAlgorithm.cpp](incrementalAlgorithm.cpp): Source code for the Incremental algorithm.
-- [convexHullAlgorithm.h](convexHullAlgorithm.h): Header file for the Convex Hull algorithm.
+- [report.txt](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/report.txt): Detailed information about the program's algorithms and usage.
+- [main.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/main.cpp): Main program that processes input files, creates polygons, and performs optimization.
+- [sharedLib.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/sharedLib.h): Header file containing function declarations, typedefs, and defines shared across different algorithms.
+- [sharedLib.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/sharedLib.cpp): Source code for shared functions.
+- [incrementalAlgorithm.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/incrementalAlgorithm.h): Header file for the Incremental algorithm.
+- [incrementalAlgorithm.cpp]([incrementalAlgorithm.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/incrementalAlgorithm.cpp)): Source code for the Incremental algorithm.
+- [convexHullAlgorithm.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/convexHullAlgorithm.h): Header file for the Convex Hull algorithm.
 - [convexHullAlgorithm.cpp](convexHullAlgorithm.cpp): Source code for the Convex Hull algorithm.
-- [local_search.cpp](local_search.cpp): Source code for the Local Search algorithm.
-- [local_search.h](local_search.h): Header file for the Local Search algorithm.
-- [simulated_annealing.cpp](simulated_annealing.cpp): Source code for the Simulated Annealing algorithm.
-- [simulated_annealing.h](simulated_annealing.h): Header file for the Simulated Annealing algorithm.
+- [local_search.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/local_search.h): Header file for the Local Search algorithm.
+- [local_search.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/local_search.cpp): Source code for the Local Search algorithm.
+- [simulated_annealing.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/simulated_annealing.h): Header file for the Simulated Annealing algorithm.
+- [simulated_annealing.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/6ac0c71f9d437004321efb7a4b647f4c72d95320/Project2_Polygon_Optimization/simulated_annealing.cpp): Source code for the Simulated Annealing algorithm.
+
 
 ## Compilation and Execution
 
