@@ -8,15 +8,15 @@ This C++ program generates a simple polygon from a set of points in 2D space usi
 ## Files
 
 - README.md: This file.
-- [Makefile](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/Makefile): Makefile for building the program.
-- [report.txt](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/report.txt): Comparison of results for both algorithms with different edge selections and initializations.
-- [main.cpp](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/main.cpp): Main program that reads input points, creates a polygon based on user-specified parameters, and generates an output file.
-- [sharedLib.h](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/sharedLib.h): Header file containing function declarations, typedefs, and defines used by both algorithms and the main program.
-- [sharedLib.cpp](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/sharedLib.cpp): Source code for functions shared by both algorithms and the main program.
-- [incrementalAlgorithm.h](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/incrementalAlgorithm.h): Header file for Incremental algorithm function declarations, typedefs, and defines.
-- [incrementalAlgorithm.cpp](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/incrementalAlgorithm.cpp): Source code for functions used by the Incremental algorithm.
-- [convexHullAlgorithm.h](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/convexHullAlgorithm.h): Header file for Convex Hull algorithm function declarations, typedefs, and defines.
-- [convexHullAlgorithm.cpp](https://github.com/EvangeliaS/CGAL_Polygon_Optimization/blob/5d7f90ef850c14da3e7996159eaa8031db0acf3f/Project1_Polygonization/convexHullAlgorithm.cpp): Source code for functions used by the Convex Hull algorithm.
+- [Makefile](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/bd861eb4fc3a76064ee2aa1d38c3f7c36491eaac/Project1_Polygonization/Makefile): Makefile for building the program.
+- [report.txt](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/report.txt): Comparison of results for both algorithms with different edge selections and initializations.
+- [main.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/main.cpp): Main program that reads input points, creates a polygon based on user-specified parameters, and generates an output file.
+- [sharedLib.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/sharedLib.h): Header file containing function declarations, typedefs, and defines used by both algorithms and the main program.
+- [sharedLib.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/sharedLib.cpp): Source code for functions shared by both algorithms and the main program.
+- [incrementalAlgorithm.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/incrementalAlgorithm.h): Header file for Incremental algorithm function declarations, typedefs, and defines.
+- [incrementalAlgorithm.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/incrementalAlgorithm.cpp): Source code for functions used by the Incremental algorithm.
+- [convexHullAlgorithm.h](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/convexHullAlgorithm.h): Header file for Convex Hull algorithm function declarations, typedefs, and defines.
+- [convexHullAlgorithm.cpp](https://github.com/StathisChatziloizos/CGAL-Polygon-Optimization/blob/9bbc53644100587e8cf089fde05c166fa6761338/Project1_Polygonization/convexHullAlgorithm.cpp): Source code for functions used by the Convex Hull algorithm.
 
 ## Compile & Run
 
